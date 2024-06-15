@@ -3,6 +3,7 @@ from typing import Any
 from frameworks.base import experiment
 from frameworks.fructose_framework import FructoseFramework
 from frameworks.instructor_framework import InstructorFramework
+from frameworks.llamaindex_framework import LlamaIndexFramework
 from frameworks.marvin_framework import MarvinFramework
 from frameworks.mirascope_framework import MirascopeFramework
 

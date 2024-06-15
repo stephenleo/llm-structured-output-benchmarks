@@ -1,11 +1,11 @@
 from typing import Any
 
-import marvin
+from llama_index.program.openai import OpenAIPydanticProgram
 
 from frameworks.base import BaseFramework, experiment
 
 
-class MarvinFramework(BaseFramework):
+class LlamaIndexFramework(BaseFramework):
     def __init__(
         self,
         name: str,
@@ -26,14 +26,19 @@ class MarvinFramework(BaseFramework):
             response_model=response_model,
         )
 
-        marvin.settings.openai.chat.completions.model = self.llm_model
+        # TODO: Swap the Program based on self.llm_model
+        self.llamaindex_client = OpenAIPydanticProgram.from_defaults(
+            output_cls=self.response_model,
+            prompt_template_str=self.prompt,
+            llm_model=self.llm_model,
+        )
 
     def run(
         self, n_runs: int, expected_response: Any, inputs: dict
     ) -> tuple[list[Any], float, float]:
         @experiment(n_runs=n_runs, expected_response=expected_response)
         def run_experiment(inputs):
-            response = marvin.cast(self.prompt.format(**inputs), self.response_model)
+            response = self.llamaindex_client(**inputs, description="Data model of items present in the text")
             return response
 
         predictions, percent_successful, accuracy = run_experiment(inputs)

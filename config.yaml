@@ -37,3 +37,13 @@ MarvinFramework:
       retries: 0 # Marvin has no retry parameter
       source_data_pickle_path: "data/multilabel_classification.pkl"
       sample_rows: 2
+
+LlamaIndexFramework:
+  - name: "multilabel_classification"
+    n_runs: 2
+    init_kwargs:
+      prompt: "Classify the following text: {text}"
+      llm_model: "gpt-3.5-turbo-0125"
+      retries: 0 # LlamaIndex has no retry parameter
+      source_data_pickle_path: "data/multilabel_classification.pkl"
+      sample_rows: 2
