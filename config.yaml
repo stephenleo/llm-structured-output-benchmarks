@@ -1,0 +1,19 @@
+InstructorFramework:
+  - name: "multilabel_classification"
+    n_runs: 2
+    init_kwargs:
+      prompt: "Classify the following text. The text might have one or more classes: {text}"
+      llm_model: "gpt-3.5-turbo-0125"
+      retries: 2
+      source_data_pickle_path: "data/multilabel_classification.pkl"
+      sample_rows: 2
+
+MirascopeFramework:
+  - name: "multilabel_classification"
+    n_runs: 2
+    init_kwargs:
+      prompt: "Classify the following text. The text might have one or more classes: {text}"
+      llm_model: "gpt-3.5-turbo-0125"
+      retries: 2
+      source_data_pickle_path: "data/multilabel_classification.pkl"
+      sample_rows: 2
