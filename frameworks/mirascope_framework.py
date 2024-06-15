@@ -34,6 +34,8 @@ class MirascopeFramework(BaseFramework):
         mirascope_pydantic_fields["extract_schema"] = (Type[self.response_model], self.response_model)
         mirascope_pydantic_fields["prompt_template"] = (str, self.prompt)
 
+        # Mirascope TaskExtractor model
+        # TODO: Swap the Extractor based on self.llm_model
         TaskExtractor = create_model(
             "TaskExtractor",
             __base__=OpenAIExtractor[self.response_model],
@@ -47,10 +49,12 @@ class MirascopeFramework(BaseFramework):
     ) -> tuple[list[Any], float, float]:
         @experiment(n_runs=n_runs, expected_response=expected_response)
         def run_experiment(inputs):
+            # Pass the inputs to the mirascope TaskExtractor
             for field, value in inputs.items():
                 setattr(self.mirascope_client, field, value)
+
             response = self.mirascope_client.extract(retries=2)
-            return {cat.value for cat in response.classes}
+            return response
 
         predictions, percent_successful, accuracy = run_experiment(inputs)
         return predictions, percent_successful, accuracy

@@ -7,8 +7,18 @@
 1. Results are stored in the `data` directory.
 
 ## Add a new framework
-1. Create a new folder in the frameworks directory with the name of the framework.
-1. Create a .py file in this folder and create a class that inherits `BaseFramework` from `frameworks.base`.
+The easiest way to create a new framework is to reference the `./frameworks/instructor_framework.py` file. Detailed steps are as follows:
+
+1. Create a .py file in frameworks directory with the name of the framework.
+1. In this .py file create a class that inherits `BaseFramework` from `frameworks.base`.
+1. The class should define an `init` method that initializes the base class with the expected arguments:
+    - name (str): name of the task that the framework is being tested on. 
+    - prompt (str): Prompt template used. Obtained from the `init_kwargs` in the `./config.yaml` file. 
+    - llm_model (str): LLM model to be used. Obtained from the `init_kwargs` in the `./config.yaml` file.
+    - retries (int): Number of retries for the framework. Obtained from the `init_kwargs` in the `./config.yaml` file.
+    - source_data_picke_path (str): Path to the source data pickle file. Obtained from the `init_kwargs` in the `./config.yaml` file.
+    - sample_rows (int): Number of rows to sample from the source data. Useful for testing on a smaller subset of data. Set the default value to $0$ so that if it's not specified, all rows in source_data_pickle_path are used. Obtained from the `init_kwargs` in the `./config.yaml` file.
+    - response_model (Any): The response model to be used. Internally passed by the benchmarking script. Set the default value to `None`.
 1. The class should define a `run` method that takes three arguments:
     1. `inputs`: a dictionary of `{"text": str}` where `str` is the text to be sent to the framework
     1. `n_runs`: number of times to repeat each text

@@ -1,12 +1,12 @@
 from typing import Any
 
-import instructor
-from openai import OpenAI
+import marvin
+from loguru import logger
 
 from frameworks.base import BaseFramework, experiment
 
 
-class InstructorFramework(BaseFramework):
+class MarvinFramework(BaseFramework):
     def __init__(
         self,
         name: str,
@@ -26,19 +26,15 @@ class InstructorFramework(BaseFramework):
             sample_rows=sample_rows,
             response_model=response_model,
         )
-        self.instructor_client = instructor.patch(OpenAI())
+
+        marvin.settings.openai.chat.completions.model = self.llm_model
 
     def run(
         self, n_runs: int, expected_response: Any, inputs: dict
     ) -> tuple[list[Any], float, float]:
         @experiment(n_runs=n_runs, expected_response=expected_response)
         def run_experiment(inputs):
-            response = self.instructor_client.chat.completions.create(
-                model=self.llm_model,
-                response_model=self.response_model,
-                max_retries=self.retries,
-                messages=[{"role": "user", "content": self.prompt.format(**inputs)}],
-            )
+            response = marvin.cast(self.prompt.format(**inputs), self.response_model)
             return response
 
         predictions, percent_successful, accuracy = run_experiment(inputs)
