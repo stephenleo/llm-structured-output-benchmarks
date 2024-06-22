@@ -4,6 +4,10 @@
 [![DOI](https://zenodo.org/badge/815423644.svg)](https://zenodo.org/doi/10.5281/zenodo.12327266)
 [![GitHub - License](https://img.shields.io/github/license/stephenleo/llm-structured-output-benchmarks?logo=github&style=flat&color=green)][#github-license]
 
+![Github](https://img.shields.io/github/followers/stephenleo?style=social) 
+[![dev.to badge](https://img.shields.io/badge/-Marie%20Stephen%20Leo-blue?style=flat&logo=linkedin)](https://www.linkedin.com/in/marie-stephen-leo/) 
+[![dev.to badge](https://img.shields.io/badge/-Medium-blueviolet?style=flat&logo=medium)](https://stephen-leo.medium.com/)
+
 [#github-license]: https://github.com/stephenleo/llm-structured-output-benchmarks/blob/main/LICENSE
 <!--- BADGES: END --->
 
