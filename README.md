@@ -1,5 +1,5 @@
 # 🧩 LLM Structured Output Benchmarks
-
+Benchmark various LLM Structured Output frameworks: Instructor, Mirascope, Langchain, LlamaIndex, Fructose, Marvin, Outlines, etc on tasks like multi-label classification, named entity recognition, synthetic data generation, etc.
 
 ## 🏆 Benchmark Results [2024-06-22]
 1. Multi-label classification
@@ -57,9 +57,9 @@ The easiest way to create a new framework is to reference the `./frameworks/inst
     - `sample_rows` (int): Number of rows to sample from the source data. Useful for testing on a smaller subset of data. Default is $0$ which uses all rows in source_data_pickle_path for the benchmarking. Obtained from the `init_kwargs` in the `./config.yaml` file.
     - `response_model` (Any): The response model to be used. Internally passed by the benchmarking script.
 1. The class should define a `run` method that takes three arguments:
-    1. `inputs`: a dictionary of `{"text": str}` where `str` is the text to be sent to the framework
-    1. `n_runs`: number of times to repeat each text
-    1. `expected_response`: Output expected from the framework
+    - `inputs`: a dictionary of `{"text": str}` where `str` is the text to be sent to the framework
+    - `n_runs`: number of times to repeat each text
+    - `expected_response`: Output expected from the framework
 1. This `run` method should create another `run_experiment` function that takes `inputs` as argument, runs that input through the framework and returns the output.
 1. The `run_experiment` function should be annotated with the `@experiment` decorator from `frameworks.base` with `n_runs` and `expected_resposne` as arguments.
 1. The `run` method should call the `run_experiment` function and return the three outputs `predictions`, `percent_successful` and `accuracy`.
