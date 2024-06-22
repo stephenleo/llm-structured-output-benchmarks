@@ -9,25 +9,8 @@ from frameworks.base import BaseFramework, experiment
 
 
 class FructoseFramework(BaseFramework):
-    def __init__(
-        self,
-        name: str,
-        prompt: str,
-        llm_model: str,
-        retries: int,
-        source_data_pickle_path: str,
-        sample_rows: int = 0,
-        response_model: Any = None,
-    ) -> None:
-        super().__init__(
-            name,
-            prompt,
-            llm_model,
-            retries,
-            source_data_pickle_path,
-            sample_rows,
-            response_model,
-        )
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
 
         self.fructose_client = Fructose(model=self.llm_model)
 

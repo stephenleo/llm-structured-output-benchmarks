@@ -69,24 +69,29 @@ def experiment(
 
 
 class BaseFramework(ABC):
-    def __init__(
-        self,
-        name: str,
-        prompt: str,
-        llm_model: str,
-        retries: int,
-        source_data_pickle_path: str,
-        sample_rows: int,
-        response_model: Any,
-    ) -> None:
-        self.name = name
-        self.prompt = prompt
-        self.llm_model = llm_model
-        self.retries = retries
+    name: str
+    prompt: str
+    llm_model: str
+    llm_model_family: str
+    retries: int
+    source_data_pickle_path: str
+    sample_rows: int
+    response_model: Any
+    device: str
+
+    def __init__(self, *args, **kwargs) -> None:
+        self.name = kwargs.get("name", "Framework")
+        self.prompt = kwargs.get("prompt", "")
+        self.llm_model = kwargs.get("llm_model", "gpt-3.5-turbo")
+        self.llm_model_family = kwargs.get("llm_model_family", "openai")
+        self.retries = kwargs.get("retries", 0)
+        self.device = kwargs.get("device", "cpu")
+        source_data_pickle_path = kwargs.get("source_data_pickle_path", "")
 
         # Load the data
         self.source_data = pd.read_pickle(source_data_pickle_path)
 
+        sample_rows = kwargs.get("sample_rows", 0)
         if sample_rows:
             self.source_data = self.source_data.sample(sample_rows)
             self.source_data = self.source_data.reset_index(drop=True)
@@ -104,7 +109,7 @@ class BaseFramework(ABC):
 
         # Create the response model
         # TODO: only for classification tasks
-        self.response_model = response_model or multilabel_classification_model(
+        self.response_model = kwargs.get("response_model") or multilabel_classification_model(
             self.classes
         )
         logger.info(f"Response model is {self.response_model}")

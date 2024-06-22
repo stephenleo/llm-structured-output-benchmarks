@@ -6,6 +6,7 @@ from frameworks.instructor_framework import InstructorFramework
 from frameworks.llamaindex_framework import LlamaIndexFramework
 from frameworks.marvin_framework import MarvinFramework
 from frameworks.mirascope_framework import MirascopeFramework
+from frameworks.outlines_framework import OutlinesFramework
 
 
 def factory(class_name: str, *args, **kwargs) -> Any:
