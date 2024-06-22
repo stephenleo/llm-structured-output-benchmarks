@@ -1,5 +1,12 @@
 # 🧩 LLM Structured Output Benchmarks
+<!--- BADGES: START --->
+[![Python 3.11.9](https://img.shields.io/badge/python-3.11.9-blue.svg)](https://www.python.org/downloads/release/python-3119/)
 [![DOI](https://zenodo.org/badge/815423644.svg)](https://zenodo.org/doi/10.5281/zenodo.12327266)
+[![GitHub - License](https://img.shields.io/github/license/stephenleo/llm-structured-output-benchmarks?logo=github&style=flat&color=green)][#github-license]
+
+[#github-license]: https://github.com/stephenleo/llm-structured-output-benchmarks/blob/main/LICENSE
+<!--- BADGES: END --->
+
 
 Benchmark various LLM Structured Output frameworks: Instructor, Mirascope, Langchain, LlamaIndex, Fructose, Marvin, Outlines, etc on tasks like multi-label classification, named entity recognition, synthetic data generation, etc.
 
