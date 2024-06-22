@@ -1,4 +1,6 @@
 # 🧩 LLM Structured Output Benchmarks
+[![DOI](https://zenodo.org/badge/815423644.svg)](https://zenodo.org/doi/10.5281/zenodo.12327266)
+
 Benchmark various LLM Structured Output frameworks: Instructor, Mirascope, Langchain, LlamaIndex, Fructose, Marvin, Outlines, etc on tasks like multi-label classification, named entity recognition, synthetic data generation, etc.
 
 ## 🏆 Benchmark Results [2024-06-22]
@@ -97,6 +99,17 @@ Contributions are welcome! Here are the steps to contribute:
 ## 🎓 Citation
 To cite LLM Structured Output Benchmarks in your work, please use the following bibtex reference:
 ```
+@software{marie_stephen_leo_2024_12327267,
+  author       = {Marie Stephen Leo},
+  title        = {{stephenleo/llm-structured-output-benchmarks: 
+                   Release for Zenodo}},
+  month        = jun,
+  year         = 2024,
+  publisher    = {Zenodo},
+  version      = {v0.0.1},
+  doi          = {10.5281/zenodo.12327267},
+  url          = {https://doi.org/10.5281/zenodo.12327267}
+}
 ```
 
 ## 🙏 Feedback
