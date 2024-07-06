@@ -26,10 +26,11 @@ def run_benchmark(config_path: str = "config.yaml"):
         for config in config_values:
             config_name = config["name"]
             n_runs = config["n_runs"]
-            results[config_key][config_name] = {
+            run_results = {
                 "predictions": [],
                 "percent_successful": [],
                 "accuracy": [],
+                "latencies": []
             }
 
             framework_instance = factory(
@@ -44,17 +45,18 @@ def run_benchmark(config_path: str = "config.yaml"):
             ):
                 # logger.info(f"Actual Text: {row.text}")
                 # logger.info(f"Actual Labels: {set(row.labels)}")
-                predictions, percent_successful, accuracy = framework_instance.run(
+                predictions, percent_successful, accuracy, latencies = framework_instance.run(
                     inputs={"text": row.text},
                     n_runs=n_runs,
                     expected_response=set(row.labels),
                 )
                 # logger.info(f"Predicted Labels: {predictions}")
-                results[config_key][config_name]["predictions"].append(predictions)
-                results[config_key][config_name]["percent_successful"].append(
-                    percent_successful
-                )
-                results[config_key][config_name]["accuracy"].append(accuracy)
+                run_results["predictions"].append(predictions)
+                run_results["percent_successful"].append(percent_successful)
+                run_results["accuracy"].append(accuracy)
+                run_results["latencies"].append(latencies)
+
+            results[config_key][config_name] = run_results
 
     # logger.info(f"Results:\n{results}")
 
@@ -73,6 +75,14 @@ def generate_results(results_data_pickle_path: str  = "results/results.pkl"):
         for framework, value in results.items()
     }
     logger.info(f"Reliability:\n{metrics.reliability_metric(percent_successful)}")
+
+    # Latency
+    latencies = {
+        framework: value["multilabel_classification"]["latencies"]
+        for framework, value in results.items()
+    }
+    logger.info(f"Latencies:\n{metrics.latency_metric(latencies, 0.95)}")
+
 
 if __name__ == "__main__":
     app()

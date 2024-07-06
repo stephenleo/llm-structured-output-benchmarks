@@ -29,5 +29,5 @@ class OutlinesFramework(BaseFramework):
             response = self.outline_generator(self.prompt.format(**inputs))
             return response
 
-        predictions, percent_successful, accuracy = run_experiment(inputs)
-        return predictions, percent_successful, accuracy
+        predictions, percent_successful, accuracy, latencies = run_experiment(inputs)
+        return predictions, percent_successful, accuracy, latencies

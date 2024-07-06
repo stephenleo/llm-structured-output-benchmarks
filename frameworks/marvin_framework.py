@@ -19,5 +19,5 @@ class MarvinFramework(BaseFramework):
             response = marvin.cast(self.prompt.format(**inputs), self.response_model)
             return response
 
-        predictions, percent_successful, accuracy = run_experiment(inputs)
-        return predictions, percent_successful, accuracy
+        predictions, percent_successful, accuracy, latencies = run_experiment(inputs)
+        return predictions, percent_successful, accuracy, latencies

@@ -75,7 +75,7 @@ The easiest way to create a new framework is to reference the `./frameworks/inst
     - `expected_response`: Output expected from the framework
 1. This `run` method should create another `run_experiment` function that takes `inputs` as argument, runs that input through the framework and returns the output.
 1. The `run_experiment` function should be annotated with the `@experiment` decorator from `frameworks.base` with `n_runs` and `expected_resposne` as arguments.
-1. The `run` method should call the `run_experiment` function and return the three outputs `predictions`, `percent_successful` and `accuracy`.
+1. The `run` method should call the `run_experiment` function and return the three outputs `predictions`, `percent_successful`, `accuracy` and `latencies`.
 1. Import this new class in `frameworks/__init__.py`.
 1. Add a new entry in the `./config.yaml` file with the name of the class as the key. The yaml entry can have the following fields
     - `name`: name of the task that the framework is being tested on. Obtained from `./config.yaml` file. Eg., `"multilabel_classification"`
@@ -99,8 +99,9 @@ The easiest way to create a new framework is to reference the `./frameworks/inst
     | [DsPy](https://dspy-docs.vercel.app/docs/building-blocks/typed_predictors)                          |        🚧 In Progress       |        💭 Planning        |         💭 Planning        |
     | [Langchain](https://python.langchain.com/v0.2/docs/tutorials/extraction/)                           |        🚧 In Progress       |        💭 Planning        |         💭 Planning        |
 1. Others
-    - CICD pipeline for benchmark run automation
-    - Async run
+    - [x] Latency metrics
+    - [ ] CICD pipeline for benchmark run automation
+    - [ ] Async run
 
 ## 💡 Contribution guidelines
 Contributions are welcome! Here are the steps to contribute:

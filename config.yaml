@@ -7,7 +7,7 @@ InstructorFramework:
       llm_model_family: "openai"
       retries: 2
       source_data_pickle_path: "data/multilabel_classification.pkl"
-#      sample_rows: 2
+      # sample_rows: 2
 
 MirascopeFramework:
   - name: "multilabel_classification"
@@ -18,7 +18,7 @@ MirascopeFramework:
       llm_model_family: "openai"
       retries: 2
       source_data_pickle_path: "data/multilabel_classification.pkl"
-#      sample_rows: 2
+      # sample_rows: 2
 
 FructoseFramework:
   - name: "multilabel_classification"
@@ -29,7 +29,7 @@ FructoseFramework:
       llm_model_family: "openai"
       retries: 0 # Fructose has no retry parameter
       source_data_pickle_path: "data/multilabel_classification.pkl"
-#      sample_rows: 2
+      # sample_rows: 2
 
 MarvinFramework:
   - name: "multilabel_classification"
@@ -40,7 +40,7 @@ MarvinFramework:
       llm_model_family: "openai"
       retries: 0 # Marvin has no retry parameter
       source_data_pickle_path: "data/multilabel_classification.pkl"
-#      sample_rows: 2
+      # sample_rows: 2
 
 LlamaIndexFramework:
   - name: "multilabel_classification"
@@ -51,7 +51,7 @@ LlamaIndexFramework:
       llm_model_family: "openai"
       retries: 0 # LlamaIndex has no retry parameter
       source_data_pickle_path: "data/multilabel_classification.pkl"
-#      sample_rows: 2
+      # sample_rows: 2
 
 OutlinesFramework:
   - name: "multilabel_classification"
@@ -62,4 +62,4 @@ OutlinesFramework:
       llm_model_family: "transformers"
       retries: 0 # Oulines transformers has no retry parameter
       source_data_pickle_path: "data/multilabel_classification.pkl"
-#      sample_rows: 2
+      # sample_rows: 2

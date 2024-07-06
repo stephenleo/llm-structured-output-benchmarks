@@ -1,7 +1,7 @@
 import re
 from typing import Any, Type
 
-from mirascope.openai import OpenAIExtractor
+from mirascope.openai import OpenAICallParams, OpenAIExtractor
 from pydantic import create_model
 
 from frameworks.base import BaseFramework, experiment
@@ -24,6 +24,7 @@ class MirascopeFramework(BaseFramework):
             __base__=OpenAIExtractor[self.response_model],
             **mirascope_pydantic_fields
         )
+        TaskExtractor.call_params = OpenAICallParams(model=self.llm_model)
 
         self.mirascope_client = TaskExtractor()
 
@@ -39,5 +40,5 @@ class MirascopeFramework(BaseFramework):
             response = self.mirascope_client.extract(retries=2)
             return response
 
-        predictions, percent_successful, accuracy = run_experiment(inputs)
-        return predictions, percent_successful, accuracy
+        predictions, percent_successful, accuracy, latencies = run_experiment(inputs)
+        return predictions, percent_successful, accuracy, latencies

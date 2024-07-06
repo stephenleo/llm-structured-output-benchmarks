@@ -35,8 +35,8 @@ class FructoseFramework(BaseFramework):
         docstring_args = f"""\n\nArgs:\n    text (str): The text to analyze\n\nReturns:\n    {self.response_model.__qualname__}: The items present in the text"""
         run_experiment.__doc__ = self.prompt + docstring_args
 
-        predictions, percent_successful, accuracy = run_experiment(
+        predictions, percent_successful, accuracy, latencies = run_experiment(
             text=inputs[prompt_fields[0]]
         )
 
-        return predictions, percent_successful, accuracy
+        return predictions, percent_successful, accuracy, latencies

@@ -1,3 +1,4 @@
+import time
 from abc import ABC, abstractmethod
 from dataclasses import asdict, is_dataclass
 from typing import Any, Callable, Optional
@@ -35,12 +36,14 @@ def experiment(
 
     def experiment_decorator(func):
         def wrapper(*args, **kwargs):
-            classes = []
+            classes, latencies = [], []
             accurate = 0
             for _ in tqdm(range(n_runs), leave=False):
 
                 try:
+                    start_time = time.time()
                     response = func(*args, **kwargs)
+                    end_time = time.time()
 
                     if expected_response:
                         response = response_parsing(response)
@@ -52,6 +55,7 @@ def experiment(
                             accurate += 1
 
                     classes.append(response)
+                    latencies.append(end_time-start_time)
                 except:
                     pass
 
@@ -61,7 +65,7 @@ def experiment(
             if expected_response:
                 accuracy = accurate / num_successful if num_successful else 0
 
-            return classes, percent_successful, accuracy if expected_response else None
+            return classes, percent_successful, accuracy if expected_response else None, latencies
 
         return wrapper
 

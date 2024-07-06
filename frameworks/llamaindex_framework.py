@@ -24,5 +24,5 @@ class LlamaIndexFramework(BaseFramework):
             response = self.llamaindex_client(**inputs, description="Data model of items present in the text")
             return response
 
-        predictions, percent_successful, accuracy = run_experiment(inputs)
-        return predictions, percent_successful, accuracy
+        predictions, percent_successful, accuracy, latencies = run_experiment(inputs)
+        return predictions, percent_successful, accuracy, latencies
