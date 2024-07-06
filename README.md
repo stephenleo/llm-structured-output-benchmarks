@@ -24,6 +24,7 @@ Benchmark various LLM Structured Output frameworks: Instructor, Mirascope, Langc
     | [Mirascope](https://github.com/mirascope/mirascope)                                                 |          gpt-3.5-turbo-0125          |    0.995    |       1.280     |
     | [Instructor](https://github.com/jxnl/instructor)                                                    |          gpt-3.5-turbo-0125          |    0.992    |       1.299     |
     | [Marvin](https://github.com/PrefectHQ/marvin)                                                       |          gpt-3.5-turbo-0125          |    0.971    |       1.151     |
+    | [LMFormatEnforcer](https://github.com/noamgat/lm-format-enforcer)                                   | unsloth/llama-3-8b-Instruct-bnb-4bit |    0.950    |       7.248     |
 
 ## 🧪 Benchmark methodology
 
@@ -99,7 +100,7 @@ The easiest way to create a new framework is to reference the `./frameworks/inst
     | [Outlines](https://github.com/outlines-dev/outlines)                                                |     ✅ HF Transformers     |        💭 Planning      |         💭 Planning       |
     | [LM format enforcer](https://github.com/noamgat/lm-format-enforcer)                                 |     ✅ HF Transformers     |        💭 Planning      |         💭 Planning       |
     | [Jsonformer](https://github.com/1rgs/jsonformer)                                                    |     ❌ No Enum Support     |        💭 Planning      |         💭 Planning       |
-    | [Strictjson](https://github.com/tanchongmin/strictjson)                                             |   ❌ No Pydantic Support   |        💭 Planning      |         💭 Planning       |
+    | [Strictjson](https://github.com/tanchongmin/strictjson)                                             |   ❌ Non-standard schema   |        💭 Planning      |         💭 Planning       |
     | [Guidance](https://github.com/guidance-ai/guidance)                                                 |        🚧 In Progress      |        💭 Planning      |         💭 Planning       |
     | [DsPy](https://dspy-docs.vercel.app/docs/building-blocks/typed_predictors)                          |        🚧 In Progress      |        💭 Planning      |         💭 Planning       |
     | [Langchain](https://python.langchain.com/v0.2/docs/tutorials/extraction/)                           |        🚧 In Progress      |        💭 Planning      |         💭 Planning       |
