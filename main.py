@@ -81,7 +81,7 @@ def generate_results(results_data_pickle_path: str  = "results/results.pkl"):
         framework: value["multilabel_classification"]["latencies"]
         for framework, value in results.items()
     }
-    logger.info(f"Latencies:\n{metrics.latency_metric(latencies, 0.95)}")
+    logger.info(f"Latencies:\n{metrics.latency_metric(latencies, 95)}")
 
 
 if __name__ == "__main__":
