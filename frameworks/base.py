@@ -1,6 +1,7 @@
 import time
 from abc import ABC, abstractmethod
 from dataclasses import asdict, is_dataclass
+from enum import Enum
 from typing import Any, Callable, Optional
 
 import pandas as pd
@@ -13,7 +14,7 @@ from data_sources.data_models import multilabel_classification_model
 
 def response_parsing(response: Any) -> Any:
     if isinstance(response, list):
-        response = {member.value for member in response}
+        response = {member.value if isinstance(member, Enum) else member for member in response}
     elif is_dataclass(response):
         response = asdict(response)
     elif isinstance(response, BaseModel):

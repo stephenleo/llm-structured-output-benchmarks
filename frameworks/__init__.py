@@ -4,6 +4,7 @@ from frameworks.base import experiment
 from frameworks.fructose_framework import FructoseFramework
 from frameworks.instructor_framework import InstructorFramework
 from frameworks.llamaindex_framework import LlamaIndexFramework
+from frameworks.lm_format_enforcer_framework import LMFormatEnforcerFramework
 from frameworks.marvin_framework import MarvinFramework
 from frameworks.mirascope_framework import MirascopeFramework
 from frameworks.outlines_framework import OutlinesFramework
@@ -24,4 +25,4 @@ def factory(class_name: str, *args, **kwargs) -> Any:
     if class_name in globals():
         return globals()[class_name](*args, **kwargs)
     else:
-        raise ValueError(f'Invalid class name: {class_name}')
+        raise ValueError(f"Invalid class name: {class_name}")
