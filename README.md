@@ -11,7 +11,7 @@
 [#github-license]: https://github.com/stephenleo/llm-structured-output-benchmarks/blob/main/LICENSE
 <!--- BADGES: END --->
 
-Benchmark various LLM Structured Output frameworks: Instructor, Mirascope, Langchain, LlamaIndex, Fructose, Marvin, Outlines, etc on tasks like multi-label classification, named entity recognition, synthetic data generation, etc.
+Benchmark various LLM Structured Output frameworks: Instructor, Mirascope, Langchain, LlamaIndex, Fructose, Marvin, Outlines, LMFormatEnforcer, etc on tasks like multi-label classification, named entity recognition, synthetic data generation, etc.
 
 ## 🏆 Benchmark Results [2024-07-06]
 
