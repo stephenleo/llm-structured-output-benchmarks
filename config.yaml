@@ -75,3 +75,10 @@ LMFormatEnforcerFramework:
       source_data_pickle_path: "data/multilabel_classification.pkl"
       max_length: 4096
       # sample_rows: 2
+
+PolyfactoryFramework:
+  - name: "multilabel_classification"
+    n_runs: 10
+    init_kwargs:
+      source_data_pickle_path: "data/multilabel_classification.pkl"
+      # sample_rows: 2
