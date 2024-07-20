@@ -21,8 +21,8 @@ Benchmark various LLM Structured Output frameworks: Instructor, Mirascope, Langc
     | [Instructor](https://github.com/jxnl/instructor)                                                    |        gpt-4o-mini-2024-07-18        |    1.000    |       1.096     |
     | [Mirascope](https://github.com/mirascope/mirascope)                                                 |        gpt-4o-mini-2024-07-18        |    1.000    |       1.523     |
     | [Fructose](https://github.com/bananaml/fructose)                                                    |        gpt-4o-mini-2024-07-18        |    1.000    |       2.256     |
-    | [Outlines](https://github.com/outlines-dev/outlines)                                                | unsloth/llama-3-8b-Instruct-bnb-4bit |    1.000    | 1.891 <sup>*</sup> |
-    | [LMFormatEnforcer](https://github.com/noamgat/lm-format-enforcer)                                   | unsloth/llama-3-8b-Instruct-bnb-4bit |    1.000    | 2.994 <sup>*</sup> |
+    | [Outlines](https://github.com/outlines-dev/outlines)                                                | unsloth/llama-3-8b-Instruct-bnb-4bit |    1.000    | 1.891<sup>*</sup> |
+    | [LMFormatEnforcer](https://github.com/noamgat/lm-format-enforcer)                                   | unsloth/llama-3-8b-Instruct-bnb-4bit |    1.000    | 2.994<sup>*</sup> |
     | [Llamaindex](https://docs.llamaindex.ai/en/stable/examples/output_parsing/openai_pydantic_program/) |        gpt-4o-mini-2024-07-18        |    0.999    |       0.936     |
     | [Modelsmith](https://github.com/christo-olivier/modelsmith)                                         |        gpt-4o-mini-2024-07-18        |    0.999    |       1.333     |
     | [Marvin](https://github.com/PrefectHQ/marvin)                                                       |        gpt-4o-mini-2024-07-18        |    0.998    |       1.722     |
