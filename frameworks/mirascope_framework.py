@@ -29,9 +29,9 @@ class MirascopeFramework(BaseFramework):
         self.mirascope_client = TaskExtractor()
 
     def run(
-        self, n_runs: int, expected_response: Any, inputs: dict
-    ) -> tuple[list[Any], float, float]:
-        @experiment(n_runs=n_runs, expected_response=expected_response)
+        self, n_runs: int, expected_response: Any, inputs: dict, task: str
+    ) -> tuple[list[Any], float, dict, list[list[float]]]:
+        @experiment(n_runs=n_runs, expected_response=expected_response, task=task)
         def run_experiment(inputs):
             # Pass the inputs to the mirascope TaskExtractor
             for field, value in inputs.items():
@@ -40,5 +40,5 @@ class MirascopeFramework(BaseFramework):
             response = self.mirascope_client.extract(retries=2)
             return response
 
-        predictions, percent_successful, accuracy, latencies = run_experiment(inputs)
-        return predictions, percent_successful, accuracy, latencies
+        predictions, percent_successful, metrics, latencies = run_experiment(inputs)
+        return predictions, percent_successful, metrics, latencies

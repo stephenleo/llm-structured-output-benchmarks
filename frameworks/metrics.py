@@ -33,3 +33,36 @@ def latency_metric(latencies: dict[str, list[float]], percentile: int = 95):
         by=f"Latency_p{percentile}(s)", ascending=True, inplace=True
     )
     return latency_percentile
+
+
+def ner_micro_metrics(results: dict[str, list[float]]):
+    micro_metrics = {
+            "framework": [],
+            "micro_precision": [],
+            "micro_recall": [],
+            "micro_f1": []
+        }
+    
+    for framework, values in results.items():
+        tp_total, fp_total, fn_total = 0, 0, 0
+        metrics = values["ner"]["metrics"]
+
+        for metric in metrics:
+            tp_total += sum(metric["true_positives"].values())
+            fp_total += sum(metric["false_positives"].values())
+            fn_total += sum(metric["false_negatives"].values())
+
+        micro_precision = tp_total / (tp_total + fp_total) if (tp_total + fp_total) > 0 else 0
+        micro_recall = tp_total / (tp_total + fn_total) if (tp_total + fn_total) > 0 else 0
+        micro_f1 = (
+            2 * micro_precision * micro_recall / (micro_precision + micro_recall)
+            if (micro_precision + micro_recall) > 0
+            else 0
+        )
+
+        micro_metrics["framework"].append(framework.replace("Framework", ""))
+        micro_metrics["micro_precision"].append(micro_precision)
+        micro_metrics["micro_recall"].append(micro_recall)
+        micro_metrics["micro_f1"].append(micro_f1)
+
+    return pd.DataFrame(micro_metrics)

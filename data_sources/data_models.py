@@ -1,8 +1,8 @@
 import dataclasses
 from enum import Enum
-from typing import Any, Type
+from typing import Any, Optional, Type
 
-from pydantic import BaseModel
+from pydantic import BaseModel, create_model
 from pydantic_core import PydanticUndefined
 
 
@@ -14,6 +14,14 @@ def multilabel_classification_model(multilabel_classes):
         ]
 
     return MultiLabelClassification
+
+
+def ner_model(ner_entities):
+    fields = {name: (Optional[list[str]], None) for name in ner_entities}
+
+    NER = create_model("NER", **fields)
+
+    return NER
 
 
 def pydantic_to_dataclass(

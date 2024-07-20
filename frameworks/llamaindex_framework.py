@@ -17,12 +17,12 @@ class LlamaIndexFramework(BaseFramework):
         )
 
     def run(
-        self, n_runs: int, expected_response: Any, inputs: dict
-    ) -> tuple[list[Any], float, float]:
-        @experiment(n_runs=n_runs, expected_response=expected_response)
+        self, n_runs: int, expected_response: Any, inputs: dict, task: str
+    ) -> tuple[list[Any], float, dict, list[list[float]]]:
+        @experiment(n_runs=n_runs, expected_response=expected_response, task=task)
         def run_experiment(inputs):
             response = self.llamaindex_client(**inputs, description="Data model of items present in the text")
             return response
 
-        predictions, percent_successful, accuracy, latencies = run_experiment(inputs)
-        return predictions, percent_successful, accuracy, latencies
+        predictions, percent_successful, metrics, latencies = run_experiment(inputs)
+        return predictions, percent_successful, metrics, latencies
