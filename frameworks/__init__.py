@@ -8,6 +8,7 @@ from frameworks.lm_format_enforcer_framework import LMFormatEnforcerFramework
 from frameworks.marvin_framework import MarvinFramework
 from frameworks.mirascope_framework import MirascopeFramework
 from frameworks.outlines_framework import OutlinesFramework
+from frameworks.polyfactory_framework import PolyfactoryFramework
 
 
 def factory(class_name: str, *args, **kwargs) -> Any:
