@@ -113,17 +113,17 @@ def experiment(
                     if response == expected_response:
                         accurate += 1
 
-                matrics = {
+                framework_metrics = {
                     "accuracy": accurate / num_successful if num_successful else 0
                 }
             elif task == "ner":
                 for response in responses:
-                    metrics = calculate_metrics(expected_response, response)
+                    framework_metrics = calculate_metrics(expected_response, response)
 
             return (
                 responses,
                 percent_successful,
-                metrics if expected_response else None,
+                framework_metrics if expected_response else None,
                 latencies,
             )
 
