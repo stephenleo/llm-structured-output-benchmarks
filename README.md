@@ -18,14 +18,16 @@ Benchmark various LLM Structured Output frameworks: Instructor, Mirascope, Langc
 1. Multi-label classification
     | Framework                                                                                           |                 Model                | Reliability | Latency p95 (s) |
     |-----------------------------------------------------------------------------------------------------|:------------------------------------:|:-----------:|:---------------:|
-    | [Fructose](https://github.com/bananaml/fructose)                                                    |          gpt-3.5-turbo-0125          |    1.000    |       0.869     |
-    | [Outlines](https://github.com/outlines-dev/outlines)                                                | unsloth/llama-3-8b-Instruct-bnb-4bit |    1.000    |       1.977     |
-    | [LMFormatEnforcer](https://github.com/noamgat/lm-format-enforcer)                                   | unsloth/llama-3-8b-Instruct-bnb-4bit |    1.000    |       2.994     |
-    | [Llamaindex](https://docs.llamaindex.ai/en/stable/examples/output_parsing/openai_pydantic_program/) |          gpt-3.5-turbo-0125          |    0.997    |       0.838     |
-    | [Mirascope](https://github.com/mirascope/mirascope)                                                 |          gpt-3.5-turbo-0125          |    0.995    |       1.280     |
-    | [Instructor](https://github.com/jxnl/instructor)                                                    |          gpt-3.5-turbo-0125          |    0.992    |       1.299     |
-    | [Marvin](https://github.com/PrefectHQ/marvin)                                                       |          gpt-3.5-turbo-0125          |    0.971    |       1.151     |
-
+    | [Instructor](https://github.com/jxnl/instructor)                                                    |        gpt-4o-mini-2024-07-18        |    1.000    |       1.096     |
+    | [Mirascope](https://github.com/mirascope/mirascope)                                                 |        gpt-4o-mini-2024-07-18        |    1.000    |       1.523     |
+    | [Fructose](https://github.com/bananaml/fructose)                                                    |        gpt-4o-mini-2024-07-18        |    1.000    |       2.256     |
+    | [Outlines](https://github.com/outlines-dev/outlines)                                                | unsloth/llama-3-8b-Instruct-bnb-4bit |    1.000    | 1.891 <sup>*</sup> |
+    | [LMFormatEnforcer](https://github.com/noamgat/lm-format-enforcer)                                   | unsloth/llama-3-8b-Instruct-bnb-4bit |    1.000    | 2.994 <sup>*</sup> |
+    | [Llamaindex](https://docs.llamaindex.ai/en/stable/examples/output_parsing/openai_pydantic_program/) |        gpt-4o-mini-2024-07-18        |    0.999    |       0.936     |
+    | [Modelsmith](https://github.com/christo-olivier/modelsmith)                                         |        gpt-4o-mini-2024-07-18        |    0.999    |       1.333     |
+    | [Marvin](https://github.com/PrefectHQ/marvin)                                                       |        gpt-4o-mini-2024-07-18        |    0.998    |       1.722     |
+    
+<sup>*</sup> NVIDIA GeForce RTX 4080 Super GPU
 
 ## 🧪 Benchmark methodology
 

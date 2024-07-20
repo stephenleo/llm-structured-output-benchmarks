@@ -1,3 +1,4 @@
+import os
 import pickle
 
 import torch
@@ -58,16 +59,24 @@ def run_benchmark(config_path: str = "config.yaml"):
 
             results[config_key][config_name] = run_results
 
-    # logger.info(f"Results:\n{results}")
+        # logger.info(f"Results:\n{results}")
 
-    with open("results/results.pkl", "wb") as file:
-        pickle.dump(results, file)
+        with open(f"results/{config_key}.pkl", "wb") as file:
+            pickle.dump(results, file)
+            logger.info(f"Results saved to results/{config_key}.pkl")
 
 
 @app.command()
-def generate_results(results_data_pickle_path: str  = "results/results.pkl"):
-    with open(results_data_pickle_path, "rb") as file:
-        results = pickle.load(file)
+def generate_results(results_data_path: str  = "./results"):
+
+    # Combine results from different frameworks
+    results = {}
+    for file_name in os.listdir(results_data_path):
+        if file_name.endswith(".pkl"):
+            file_path = os.path.join(results_data_path, file_name)
+            with open(file_path, "rb") as file:
+                framework_results = pickle.load(file)
+                results.update(framework_results)
 
     # Reliability
     percent_successful = {   

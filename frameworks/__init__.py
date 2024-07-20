@@ -7,6 +7,7 @@ from frameworks.llamaindex_framework import LlamaIndexFramework
 from frameworks.lm_format_enforcer_framework import LMFormatEnforcerFramework
 from frameworks.marvin_framework import MarvinFramework
 from frameworks.mirascope_framework import MirascopeFramework
+from frameworks.modelsmith_framework import ModelsmithFramework
 from frameworks.outlines_framework import OutlinesFramework
 
 

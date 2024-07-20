@@ -3,7 +3,7 @@ InstructorFramework:
     n_runs: 10
     init_kwargs:
       prompt: "Classify the following text: {text}"
-      llm_model: "gpt-3.5-turbo-0125"
+      llm_model: "gpt-4o-mini-2024-07-18"
       llm_model_family: "openai"
       retries: 2
       source_data_pickle_path: "data/multilabel_classification.pkl"
@@ -14,7 +14,7 @@ MirascopeFramework:
     n_runs: 10
     init_kwargs:
       prompt: "Classify the following text: {text}"
-      llm_model: "gpt-3.5-turbo-0125"
+      llm_model: "gpt-4o-mini-2024-07-18"
       llm_model_family: "openai"
       retries: 2
       source_data_pickle_path: "data/multilabel_classification.pkl"
@@ -25,7 +25,7 @@ FructoseFramework:
     n_runs: 10
     init_kwargs:
       prompt: "Classify the following text: {text}"
-      llm_model: "gpt-3.5-turbo-0125"
+      llm_model: "gpt-4o-mini-2024-07-18"
       llm_model_family: "openai"
       retries: 0 # Fructose has no retry parameter
       source_data_pickle_path: "data/multilabel_classification.pkl"
@@ -36,7 +36,7 @@ MarvinFramework:
     n_runs: 10
     init_kwargs:
       prompt: "Classify the following text: {text}"
-      llm_model: "gpt-3.5-turbo-0125"
+      llm_model: "gpt-4o-mini-2024-07-18"
       llm_model_family: "openai"
       retries: 0 # Marvin has no retry parameter
       source_data_pickle_path: "data/multilabel_classification.pkl"
@@ -47,7 +47,7 @@ LlamaIndexFramework:
     n_runs: 10
     init_kwargs:
       prompt: "Classify the following text: {text}"
-      llm_model: "gpt-3.5-turbo-0125"
+      llm_model: "gpt-4o-mini-2024-07-18"
       llm_model_family: "openai"
       retries: 0 # LlamaIndex has no retry parameter
       source_data_pickle_path: "data/multilabel_classification.pkl"
@@ -74,4 +74,15 @@ LMFormatEnforcerFramework:
       retries: 0 
       source_data_pickle_path: "data/multilabel_classification.pkl"
       max_length: 4096
+      # sample_rows: 2
+
+ModelsmithFramework:
+  - name: "multilabel_classification"
+    n_runs: 10
+    init_kwargs:
+      prompt: "Classify the following text: {text}"
+      llm_model: "gpt-4o-mini-2024-07-18"
+      llm_model_family: "openai"
+      retries: 2
+      source_data_pickle_path: "data/multilabel_classification.pkl"
       # sample_rows: 2
