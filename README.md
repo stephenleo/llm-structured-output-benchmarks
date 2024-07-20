@@ -13,18 +13,19 @@
 
 Benchmark various LLM Structured Output frameworks: Instructor, Mirascope, Langchain, LlamaIndex, Fructose, Marvin, Outlines, LMFormatEnforcer, etc on tasks like multi-label classification, named entity recognition, synthetic data generation, etc.
 
-## 🏆 Benchmark Results [2024-07-06]
+## 🏆 Benchmark Results [2024-07-20]
 
 1. Multi-label classification
     | Framework                                                                                           |                 Model                | Reliability | Latency p95 (s) |
     |-----------------------------------------------------------------------------------------------------|:------------------------------------:|:-----------:|:---------------:|
     | [Fructose](https://github.com/bananaml/fructose)                                                    |          gpt-3.5-turbo-0125          |    1.000    |       0.869     |
     | [Outlines](https://github.com/outlines-dev/outlines)                                                | unsloth/llama-3-8b-Instruct-bnb-4bit |    1.000    |       1.977     |
+    | [LMFormatEnforcer](https://github.com/noamgat/lm-format-enforcer)                                   | unsloth/llama-3-8b-Instruct-bnb-4bit |    1.000    |       2.994     |
     | [Llamaindex](https://docs.llamaindex.ai/en/stable/examples/output_parsing/openai_pydantic_program/) |          gpt-3.5-turbo-0125          |    0.997    |       0.838     |
     | [Mirascope](https://github.com/mirascope/mirascope)                                                 |          gpt-3.5-turbo-0125          |    0.995    |       1.280     |
     | [Instructor](https://github.com/jxnl/instructor)                                                    |          gpt-3.5-turbo-0125          |    0.992    |       1.299     |
     | [Marvin](https://github.com/PrefectHQ/marvin)                                                       |          gpt-3.5-turbo-0125          |    0.971    |       1.151     |
-    | [LMFormatEnforcer](https://github.com/noamgat/lm-format-enforcer)                                   | unsloth/llama-3-8b-Instruct-bnb-4bit |    0.950    |       7.248     |
+
 
 ## 🧪 Benchmark methodology
 
