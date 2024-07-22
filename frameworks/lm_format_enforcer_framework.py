@@ -41,8 +41,8 @@ class LMFormatEnforcerFramework(BaseFramework):
                 prompt, prefix_allowed_tokens_fn=self.prefix_function
             )
             response = response[0]["generated_text"][len(prompt) :].strip()
-            json_response = json.loads(response)
-            return json_response
+            response = self.response_model(**json.loads(response))
+            return response
 
         predictions, percent_successful, metrics, latencies = run_experiment(inputs)
         return predictions, percent_successful, metrics, latencies

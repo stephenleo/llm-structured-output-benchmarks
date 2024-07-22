@@ -45,12 +45,13 @@ def ner_micro_metrics(results: dict[str, list[float]]):
     
     for framework, values in results.items():
         tp_total, fp_total, fn_total = 0, 0, 0
-        metrics = values["ner"]["metrics"]
+        runs = values["ner"]["metrics"]
 
-        for metric in metrics:
-            tp_total += sum(metric["true_positives"].values())
-            fp_total += sum(metric["false_positives"].values())
-            fn_total += sum(metric["false_negatives"].values())
+        for run in runs:
+            for metric in run:
+                tp_total += sum(metric["true_positives"].values())
+                fp_total += sum(metric["false_positives"].values())
+                fn_total += sum(metric["false_negatives"].values())
 
         micro_precision = tp_total / (tp_total + fp_total) if (tp_total + fp_total) > 0 else 0
         micro_recall = tp_total / (tp_total + fn_total) if (tp_total + fn_total) > 0 else 0

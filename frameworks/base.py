@@ -117,8 +117,9 @@ def experiment(
                     "accuracy": accurate / num_successful if num_successful else 0
                 }
             elif task == "ner":
+                framework_metrics = []
                 for response in responses:
-                    framework_metrics = calculate_metrics(expected_response, response)
+                    framework_metrics.append(calculate_metrics(expected_response, response))
 
             return (
                 responses,

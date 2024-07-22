@@ -29,8 +29,11 @@ Benchmark various LLM Structured Output frameworks: Instructor, Mirascope, Langc
 1. Named Entity Recognition
     | Framework                                                                                           |                 Model                | Reliability | Latency p95 (s) |  Precision  |   Recall    |  F1 Score   |
     |-----------------------------------------------------------------------------------------------------|:------------------------------------:|:-----------:|:---------------:|:-----------:|:-----------:|:-----------:|
-    | [Instructor](https://github.com/jxnl/instructor)                                                    |        gpt-4o-mini-2024-07-18        |    1.000    |       4.505     |    0.808    |    0.766    |    0.786    |
-    | [Mirascope](https://github.com/mirascope/mirascope)                                                 |        gpt-4o-mini-2024-07-18        |    1.000    |       9.648     |    0.808    |    0.670    |    0.733    |
+    | [Instructor](https://github.com/jxnl/instructor)                                                    |        gpt-4o-mini-2024-07-18        |    1.000    |       3.319     |    0.807    |    0.733    |    0.768    |
+    | [LMFormatEnforcer](https://github.com/noamgat/lm-format-enforcer)                                   | unsloth/llama-3-8b-Instruct-bnb-4bit |    1.000    | 9.655<sup>*</sup> |    0.761    |    0.488    |    0.595    |
+    | [Mirascope](https://github.com/mirascope/mirascope)                                                 |        gpt-4o-mini-2024-07-18        |    0.998    |       6.531     |    0.805    |    0.644    |    0.715    |
+    | [Llamaindex](https://docs.llamaindex.ai/en/stable/examples/output_parsing/openai_pydantic_program/) |        gpt-4o-mini-2024-07-18        |    0.997    |       2.212     |    0.770    |    0.106    |    0.186    |
+    | [Marvin](https://github.com/PrefectHQ/marvin)                                                       |        gpt-4o-mini-2024-07-18        |    0.936    |       4.179     |    0.815    |    0.797    |    0.806    |
 
 <sup>*</sup> NVIDIA GeForce RTX 4080 Super GPU
 
@@ -120,11 +123,11 @@ The easiest way to create a new framework is to reference the `./frameworks/inst
     | [Instructor](https://github.com/jxnl/instructor)                                                    |          ✅ OpenAI         |         ✅ OpenAI       |         💭 Planning       |
     | [Mirascope](https://github.com/mirascope/mirascope)                                                 |          ✅ OpenAI         |         ✅ OpenAI       |         💭 Planning       |
     | [Fructose](https://github.com/bananaml/fructose)                                                    |          ✅ OpenAI         |      🚧 In Progress     |         💭 Planning       |
-    | [Marvin](https://github.com/PrefectHQ/marvin)                                                       |          ✅ OpenAI         |      🚧 In Progress     |         💭 Planning       |
-    | [Llamaindex](https://docs.llamaindex.ai/en/stable/examples/output_parsing/openai_pydantic_program/) |          ✅ OpenAI         |      🚧 In Progress     |         💭 Planning       |
+    | [Marvin](https://github.com/PrefectHQ/marvin)                                                       |          ✅ OpenAI         |         ✅ OpenAI       |         💭 Planning       |
+    | [Llamaindex](https://docs.llamaindex.ai/en/stable/examples/output_parsing/openai_pydantic_program/) |          ✅ OpenAI         |         ✅ OpenAI       |         💭 Planning       |
     | [Modelsmith](https://github.com/christo-olivier/modelsmith)                                         |          ✅ OpenAI         |      🚧 In Progress     |         💭 Planning       |
     | [Outlines](https://github.com/outlines-dev/outlines)                                                |     ✅ HF Transformers     |      🚧 In Progress     |         💭 Planning       |
-    | [LM format enforcer](https://github.com/noamgat/lm-format-enforcer)                                 |     ✅ HF Transformers     |      🚧 In Progress     |         💭 Planning       |
+    | [LM format enforcer](https://github.com/noamgat/lm-format-enforcer)                                 |     ✅ HF Transformers     |    ✅ HF Transformers   |         💭 Planning       |
     | [Jsonformer](https://github.com/1rgs/jsonformer)                                                    |     ❌ No Enum Support     |        💭 Planning      |         💭 Planning       |
     | [Strictjson](https://github.com/tanchongmin/strictjson)                                             |   ❌ Non-standard schema   |  ❌ Non-standard schema |   ❌ Non-standard schema  |
     | [Guidance](https://github.com/guidance-ai/guidance)                                                 |         💭 Planning        |        💭 Planning      |         💭 Planning       |
