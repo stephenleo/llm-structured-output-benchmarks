@@ -19,8 +19,8 @@ Benchmark various LLM Structured Output frameworks: Instructor, Mirascope, Langc
     | Framework                                                                                           |                 Model                | Reliability | Latency p95 (s) |
     |-----------------------------------------------------------------------------------------------------|:------------------------------------:|:-----------:|:---------------:|
     | [Instructor](https://github.com/jxnl/instructor)                                                    |        gpt-4o-mini-2024-07-18        |    1.000    |       1.096     |
-    | [OpenAI Structured Output](https://github.com/openai/openai-python)                                 |        gpt-4o-mini-2024-07-18        |    1.000    |       1.096     |
-    | [Mirascope](https://github.com/mirascope/mirascope)                                                 |        gpt-4o-mini-2024-07-18        |    1.000    |       1.369     |
+    | [OpenAI Structured Output](https://github.com/openai/openai-python)                                 |        gpt-4o-mini-2024-07-18        |    1.000    |       1.369     |
+    | [Mirascope](https://github.com/mirascope/mirascope)                                                 |        gpt-4o-mini-2024-07-18        |    1.000    |       1.523     |
     | [Fructose](https://github.com/bananaml/fructose)                                                    |        gpt-4o-mini-2024-07-18        |    1.000    |       2.256     |
     | [Outlines](https://github.com/outlines-dev/outlines)                                                | unsloth/llama-3-8b-Instruct-bnb-4bit |    1.000    | 1.891<sup>*</sup> |
     | [LMFormatEnforcer](https://github.com/noamgat/lm-format-enforcer)                                   | unsloth/llama-3-8b-Instruct-bnb-4bit |    1.000    | 2.994<sup>*</sup> |
