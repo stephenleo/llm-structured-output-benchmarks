@@ -1,6 +1,7 @@
 import os
 import pickle
 
+import pandas as pd
 import torch
 import typer
 import yaml
@@ -38,7 +39,7 @@ def run_benchmark(config_path: str = "config.yaml"):
             )
             logger.info(f"Using {type(framework_instance)}")
 
-            if framework_instance.source_data:
+            if isinstance(framework_instance.source_data, pd.DataFrame):
                 for row in tqdm(
                     framework_instance.source_data.itertuples(),
                     desc=f"Running {framework_instance.task}",
