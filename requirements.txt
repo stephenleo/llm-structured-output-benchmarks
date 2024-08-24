@@ -9,6 +9,7 @@ loguru==0.7.2
 marvin==2.3.6
 mirascope==0.18.2
 modelsmith==0.6.1
+openai==1.42.0
 outlines==0.0.46
 plotly==5.22.0
 tabulate==0.9.0

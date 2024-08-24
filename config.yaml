@@ -1,3 +1,21 @@
+VanillaOpenAIFramework:
+  - task: "multilabel_classification"
+    n_runs: 10
+    init_kwargs:
+      prompt: "Classify the following text: {text}"
+      llm_model: "gpt-4o-mini-2024-07-18"
+      llm_model_family: "openai"
+      source_data_pickle_path: "data/multilabel_classification.pkl"
+      # sample_rows: 2
+  - task: "ner"
+    n_runs: 10
+    init_kwargs:
+      prompt: "Extract and resolve a list of entities from the following text: {text}"
+      llm_model: "gpt-4o-mini-2024-07-18"
+      llm_model_family: "openai"
+      source_data_pickle_path: "data/ner.pkl"
+      # sample_rows: 2
+
 InstructorFramework:
   - task: "multilabel_classification"
     n_runs: 10
