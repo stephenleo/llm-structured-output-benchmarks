@@ -18,7 +18,7 @@ class FructoseFramework(BaseFramework):
         self.response_model = pydantic_to_dataclass(self.response_model)
 
     def run(
-        self, n_runs: int, expected_response: Any, inputs: dict, task: str
+        self, task: str, n_runs: int, expected_response: Any = None, inputs: dict = {}
     ) -> tuple[list[Any], float, dict, list[list[float]]]:
         
         prompt_fields = re.findall(r"\{(.*?)\}", self.prompt)

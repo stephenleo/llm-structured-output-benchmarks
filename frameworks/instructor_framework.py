@@ -12,7 +12,7 @@ class InstructorFramework(BaseFramework):
         self.instructor_client = instructor.patch(OpenAI())
 
     def run(
-        self, n_runs: int, expected_response: Any, inputs: dict, task: str
+        self, task: str, n_runs: int, expected_response: Any = None, inputs: dict = {}
     ) -> tuple[list[Any], float, dict, list[list[float]]]:
         @experiment(n_runs=n_runs, expected_response=expected_response, task=task)
         def run_experiment(inputs):

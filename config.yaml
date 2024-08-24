@@ -15,6 +15,12 @@ VanillaOpenAIFramework:
       llm_model_family: "openai"
       source_data_pickle_path: "data/ner.pkl"
       # sample_rows: 2
+  - task: "synthetic_data_generation"
+    n_runs: 100
+    init_kwargs:
+      prompt: "Generate a random person's information. The name must be chosen at random. Make it something you wouldn't normally choose."
+      llm_model: "gpt-4o-mini-2024-07-18"
+      llm_model_family: "openai"
 
 InstructorFramework:
   - task: "multilabel_classification"
@@ -35,6 +41,13 @@ InstructorFramework:
       retries: 2
       source_data_pickle_path: "data/ner.pkl"
       # sample_rows: 2
+  - task: "synthetic_data_generation"
+    n_runs: 100
+    init_kwargs:
+      prompt: "Generate a random person's information. The name must be chosen at random. Make it something you wouldn't normally choose."
+      llm_model: "gpt-4o-mini-2024-07-18"
+      llm_model_family: "openai"
+      retries: 2
 
 MirascopeFramework:
   - task: "multilabel_classification"
@@ -86,6 +99,12 @@ MarvinFramework:
       retries: 0 # Marvin has no retry parameter
       source_data_pickle_path: "data/ner.pkl"
       # sample_rows: 2
+  - task: "synthetic_data_generation"
+    n_runs: 100
+    init_kwargs:
+      prompt: "Generate a random person's information. The name must be chosen at random. Make it something you wouldn't normally choose."
+      llm_model: "gpt-4o-mini-2024-07-18"
+      llm_model_family: "openai"
 
 LlamaIndexFramework:
   - task: "multilabel_classification"
@@ -106,6 +125,12 @@ LlamaIndexFramework:
       retries: 0 # LlamaIndex has no retry parameter
       source_data_pickle_path: "data/ner.pkl"
       # sample_rows: 2
+  - task: "synthetic_data_generation"
+    n_runs: 100
+    init_kwargs:
+      prompt: "Generate a random person's information. The name must be chosen at random. Make it something you wouldn't normally choose."
+      llm_model: "gpt-4o-mini-2024-07-18"
+      llm_model_family: "openai"
 
 OutlinesFramework:
   - task: "multilabel_classification"
@@ -117,6 +142,12 @@ OutlinesFramework:
       retries: 0 # Oulines transformers has no retry parameter
       source_data_pickle_path: "data/multilabel_classification.pkl"
       # sample_rows: 2
+  - task: "synthetic_data_generation"
+    n_runs: 100
+    init_kwargs:
+      prompt: "Generate a random person's information. The name must be chosen at random. Make it something you wouldn't normally choose."
+      llm_model: "unsloth/llama-3-8b-Instruct-bnb-4bit"
+      llm_model_family: "transformers"
 
 LMFormatEnforcerFramework:
   - task: "multilabel_classification"
@@ -139,6 +170,13 @@ LMFormatEnforcerFramework:
       source_data_pickle_path: "data/ner.pkl"
       max_length: 4096
       # sample_rows: 2
+  - task: "synthetic_data_generation"
+    n_runs: 100
+    init_kwargs:
+      prompt: "Generate a random person's information. The name must be chosen at random. Make it something you wouldn't normally choose.\nRespond in the following json schema: {json_schema}:\n"
+      llm_model: "unsloth/llama-3-8b-Instruct-bnb-4bit"
+      llm_model_family: "transformers"
+      max_length: 4096
 
 ModelsmithFramework:
   - task: "multilabel_classification"
@@ -150,6 +188,13 @@ ModelsmithFramework:
       retries: 2
       source_data_pickle_path: "data/multilabel_classification.pkl"
       # sample_rows: 2
+  - task: "synthetic_data_generation"
+    n_runs: 100
+    init_kwargs:
+      prompt: "Generate a random person's information. The name must be chosen at random. Make it something you wouldn't normally choose."
+      llm_model: "gpt-4o-mini-2024-07-18"
+      llm_model_family: "openai"
+      retries: 2
 
 # ModelsmithFramework:
 #   - task: "ner"
@@ -160,7 +205,7 @@ ModelsmithFramework:
 #       llm_model_family: "openai"
 #       retries: 2
 #       source_data_pickle_path: "data/ner.pkl"
-#       # sample_rows: 2
+      # sample_rows: 2
 
 # FructoseFramework:
 #   - task: "ner"

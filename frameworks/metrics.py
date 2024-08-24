@@ -67,3 +67,18 @@ def ner_micro_metrics(results: dict[str, list[float]]):
         micro_metrics["micro_f1"].append(micro_f1)
 
     return pd.DataFrame(micro_metrics)
+
+def variety_metric(predictions: dict[str, dict]):
+    variety = {
+        key.replace("Framework", ""): len({pred["name"] for pred in values}) / len(values)
+        for key, values in predictions.items()
+    }
+    
+    variety_df = pd.DataFrame(list(variety.values()), index=variety.keys(), columns=["Variety"])
+
+    variety_df = variety_df.round(3)
+    variety_df.sort_values(
+        by="Variety", ascending=False, inplace=True
+    )
+    return variety_df
+    

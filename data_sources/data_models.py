@@ -2,7 +2,7 @@ import dataclasses
 from enum import Enum
 from typing import Any, Optional, Type
 
-from pydantic import BaseModel, create_model
+from pydantic import BaseModel, create_model, field_validator
 from pydantic_core import PydanticUndefined
 
 
@@ -22,6 +22,27 @@ def ner_model(ner_entities):
     NER = create_model("NER", **fields)
 
     return NER
+
+
+def synthetic_data_generation_model():
+    class UserAddress(BaseModel):
+        street: str
+        city: str
+        six_digit_postal_code: int
+        country: str
+
+        @field_validator("six_digit_postal_code")
+        def postal_code_must_be_6_digits(cls, v):
+            if len(str(v)) != 6:
+                raise ValueError("Postal code must be 6 digits")
+            return v
+
+    class User(BaseModel):
+        name: str
+        age: int
+        address: UserAddress
+
+    return User
 
 
 def pydantic_to_dataclass(

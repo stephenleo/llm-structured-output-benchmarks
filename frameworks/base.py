@@ -9,7 +9,11 @@ from loguru import logger
 from pydantic import BaseModel
 from tqdm import tqdm
 
-from data_sources.data_models import multilabel_classification_model, ner_model
+from data_sources.data_models import (
+    multilabel_classification_model,
+    ner_model,
+    synthetic_data_generation_model,
+)
 
 
 def response_parsing(response: Any) -> Any:
@@ -78,7 +82,7 @@ def experiment(
 
     def experiment_decorator(func):
         def wrapper(*args, **kwargs):
-            allowed_tasks = ["multilabel_classification", "ner"]
+            allowed_tasks = ["multilabel_classification", "ner", "synthetic_data_generation"]
             if task not in allowed_tasks:
                 raise ValueError(
                     f"{task} is not allowed. Allowed values are {allowed_tasks}"
@@ -92,11 +96,10 @@ def experiment(
                     response = func(*args, **kwargs)
                     end_time = time.time()
 
-                    if expected_response:
-                        response = response_parsing(response)
+                    response = response_parsing(response)
 
-                        if "classes" in response:
-                            response = response_parsing(response["classes"])
+                    if "classes" in response:
+                        response = response_parsing(response["classes"])
 
                     responses.append(response)
                     latencies.append(end_time - start_time)
@@ -154,13 +157,16 @@ class BaseFramework(ABC):
         source_data_pickle_path = kwargs.get("source_data_pickle_path", "")
 
         # Load the data
-        self.source_data = pd.read_pickle(source_data_pickle_path)
+        if source_data_pickle_path:
+            self.source_data = pd.read_pickle(source_data_pickle_path)
 
-        sample_rows = kwargs.get("sample_rows", 0)
-        if sample_rows:
-            self.source_data = self.source_data.sample(sample_rows)
-            self.source_data = self.source_data.reset_index(drop=True)
-        logger.info(f"Loaded source data from {source_data_pickle_path}")
+            sample_rows = kwargs.get("sample_rows", 0)
+            if sample_rows:
+                self.source_data = self.source_data.sample(sample_rows)
+                self.source_data = self.source_data.reset_index(drop=True)
+            logger.info(f"Loaded source data from {source_data_pickle_path}")
+        else:
+            self.source_data = None
 
         # Create the response model
         if "response_model" in kwargs:
@@ -184,6 +190,9 @@ class BaseFramework(ABC):
             )
 
             self.response_model = ner_model(self.entities)
+
+        elif self.task == "synthetic_data_generation":
+            self.response_model = synthetic_data_generation_model()
 
         logger.info(f"Response model is {self.response_model}")
 

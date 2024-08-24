@@ -13,7 +13,7 @@
 
 Benchmark various LLM Structured Output frameworks: Instructor, Mirascope, Langchain, LlamaIndex, Fructose, Marvin, Outlines, LMFormatEnforcer, etc on tasks like multi-label classification, named entity recognition, synthetic data generation, etc.
 
-## 🏆 Benchmark Results [2024-07-20]
+## 🏆 Benchmark Results [2024-08-24]
 
 1. Multi-label classification
     | Framework                                                                                           |                 Model                | Reliability | Latency p95 (s) |
@@ -36,6 +36,16 @@ Benchmark various LLM Structured Output frameworks: Instructor, Mirascope, Langc
     | [Mirascope](https://github.com/mirascope/mirascope)                                                 |        gpt-4o-mini-2024-07-18        |    0.998    |       6.531     |    0.805    |    0.644    |    0.715    |
     | [Llamaindex](https://docs.llamaindex.ai/en/stable/examples/output_parsing/openai_pydantic_program/) |        gpt-4o-mini-2024-07-18        |    0.997    |       2.212     |    0.770    |    0.106    |    0.186    |
     | [Marvin](https://github.com/PrefectHQ/marvin)                                                       |        gpt-4o-mini-2024-07-18        |    0.936    |       4.179     |    0.815    |    0.797    |    0.806    |
+1. Synthetic Data Generation
+    | Framework                                                                                           |                 Model                | Reliability | Latency p95 (s) | Variety |
+    |-----------------------------------------------------------------------------------------------------|:------------------------------------:|:-----------:|:---------------:|:-------:|
+    | [Marvin](https://github.com/PrefectHQ/marvin)                                                       |        gpt-4o-mini-2024-07-18        |    1.000    |       1.618     |  0.010  |
+    | [Modelsmith](https://github.com/christo-olivier/modelsmith)                                         |        gpt-4o-mini-2024-07-18        |    0.990    |       2.620     |  0.808  |
+    | [Instructor](https://github.com/jxnl/instructor)                                                    |        gpt-4o-mini-2024-07-18        |    0.980    |       1.964     |  0.786  |
+    | [Llamaindex](https://docs.llamaindex.ai/en/stable/examples/output_parsing/openai_pydantic_program/) |        gpt-4o-mini-2024-07-18        |    0.980    |       1.123     |  0.020  |
+    | [OpenAI Structured Output](https://github.com/openai/openai-python)                                 |        gpt-4o-mini-2024-07-18        |    0.690    |       7.907     |  0.913  |
+    | [Outlines](https://github.com/outlines-dev/outlines)                                                | unsloth/llama-3-8b-Instruct-bnb-4bit |    0.620    | 2.559<sup>*</sup> |  0.952  |
+    | [LMFormatEnforcer](https://github.com/noamgat/lm-format-enforcer)                                   | unsloth/llama-3-8b-Instruct-bnb-4bit |    0.550    | 2.654<sup>*</sup> |  0.618  |
 
 <sup>*</sup> NVIDIA GeForce RTX 4080 Super GPU
 
@@ -47,7 +57,8 @@ Benchmark various LLM Structured Output frameworks: Instructor, Mirascope, Langc
 1. Raw results are stored in the `results` directory.
 1. Generate the results using:
     - Multilabel classification: `python -m main generate-results`
-    - NER: `python -m main generate-results --results-data-path ./results/ner --task ner`
+    - NER: `python -m main generate-results --task ner`
+    - Synthetic data generation: `python -m main generate-results --task synthetic_data_generation`
 1. To get help on the command line arguments, add `--help` after the command. Eg., `python -m main run-benchmark --help`
 
 ## 🧪 Benchmark methodology
@@ -77,6 +88,16 @@ Benchmark various LLM Structured Output frameworks: Instructor, Mirascope, Langc
         1. Recall: The micro average of the recall of the framework on the data.
         1. F1 Score: The micro average of the F1 score of the framework on the data.
     - **Experiment Details**: Run each row through the framework `n_runs` number of times and log the percent of successful runs for each row.
+1. Synthetic Data Generation
+    - **Task**: Generate synthetic data similar according to a Pydantic data model schema.
+    - **Data**:
+        - Two level nested User details Pydantic schema.
+    - **Prompt**: `Generate a random person's information. The name must be chosen at random. Make it something you wouldn't normally choose.`
+    - **Evaluation Metrics**:
+        1. Reliability: The percentage of times the framework returns valid labels without errors. The average of all the rows `percent_successful` values.
+        1. Latency: The 95th percentile of the time taken to run the framework on the data.
+        1. Variety: The percent of names that are unique compared to all names generated.
+    - **Experiment Details**: Run each row through the framework `n_runs` number of times and log the percent of successful runs.
 
 ## 📊 Adding new data
 
@@ -104,10 +125,10 @@ The easiest way to create a new framework is to reference the `./frameworks/inst
     - `sample_rows` (int): Number of rows to sample from the source data. Useful for testing on a smaller subset of data. Default is $0$ which uses all rows in source_data_pickle_path for the benchmarking. Obtained from the `init_kwargs` in the `./config.yaml` file.
     - `response_model` (Any): The response model to be used. Internally passed by the benchmarking script.
 1. The class should define a `run` method that takes three arguments:
-    - `inputs`: a dictionary of `{"text": str}` where `str` is the text to be sent to the framework
-    - `n_runs`: number of times to repeat each text
-    - `expected_response`: Output expected from the framework
     - `task`: The task that the framework is being tested on. Obtained from the `task` in the `./config.yaml` file. Eg., `"multilabel_classification"`
+    - `n_runs`: number of times to repeat each text
+    - `expected_response`: Output expected from the framework. Use default value of `None`
+    - `inputs`: a dictionary of `{"text": str}` where `str` is the text to be sent to the framework. Use default value of empty dictionary `{}`
 1. This `run` method should create another `run_experiment` function that takes `inputs` as argument, runs that input through the framework and returns the output.
 1. The `run_experiment` function should be annotated with the `@experiment` decorator from `frameworks.base` with `n_runs`, `expected_resposne` and `task` as arguments.
 1. The `run` method should call the `run_experiment` function and return the four outputs `predictions`, `percent_successful`, `metrics` and `latencies`.
@@ -122,14 +143,14 @@ The easiest way to create a new framework is to reference the `./frameworks/inst
 1. Framework related tasks:
     | Framework                                                                                           | Multi-label classification | Named Entity Recognition | Synthetic Data Generation |
     |-----------------------------------------------------------------------------------------------------|:--------------------------:|:------------------------:|:-------------------------:|
-    | [Instructor](https://github.com/jxnl/instructor)                                                    |          ✅ OpenAI         |         ✅ OpenAI       |         💭 Planning       |
-    | [Mirascope](https://github.com/mirascope/mirascope)                                                 |          ✅ OpenAI         |         ✅ OpenAI       |         💭 Planning       |
-    | [Fructose](https://github.com/bananaml/fructose)                                                    |          ✅ OpenAI         |      🚧 In Progress     |         💭 Planning       |
-    | [Marvin](https://github.com/PrefectHQ/marvin)                                                       |          ✅ OpenAI         |         ✅ OpenAI       |         💭 Planning       |
-    | [Llamaindex](https://docs.llamaindex.ai/en/stable/examples/output_parsing/openai_pydantic_program/) |          ✅ OpenAI         |         ✅ OpenAI       |         💭 Planning       |
-    | [Modelsmith](https://github.com/christo-olivier/modelsmith)                                         |          ✅ OpenAI         |      🚧 In Progress     |         💭 Planning       |
-    | [Outlines](https://github.com/outlines-dev/outlines)                                                |     ✅ HF Transformers     |      🚧 In Progress     |         💭 Planning       |
-    | [LM format enforcer](https://github.com/noamgat/lm-format-enforcer)                                 |     ✅ HF Transformers     |    ✅ HF Transformers   |         💭 Planning       |
+    | [Instructor](https://github.com/jxnl/instructor)                                                    |          ✅ OpenAI         |         ✅ OpenAI       |          ✅ OpenAI       |
+    | [Mirascope](https://github.com/mirascope/mirascope)                                                 |          ✅ OpenAI         |         ✅ OpenAI       |       🚧 In Progress     |
+    | [Fructose](https://github.com/bananaml/fructose)                                                    |          ✅ OpenAI         |      🚧 In Progress     |       🚧 In Progress     |
+    | [Marvin](https://github.com/PrefectHQ/marvin)                                                       |          ✅ OpenAI         |         ✅ OpenAI       |          ✅ OpenAI       |
+    | [Llamaindex](https://docs.llamaindex.ai/en/stable/examples/output_parsing/openai_pydantic_program/) |          ✅ OpenAI         |         ✅ OpenAI       |          ✅ OpenAI       |
+    | [Modelsmith](https://github.com/christo-olivier/modelsmith)                                         |          ✅ OpenAI         |      🚧 In Progress     |          ✅ OpenAI       |
+    | [Outlines](https://github.com/outlines-dev/outlines)                                                |     ✅ HF Transformers     |      🚧 In Progress     |     ✅ HF Transformers   |
+    | [LM format enforcer](https://github.com/noamgat/lm-format-enforcer)                                 |     ✅ HF Transformers     |    ✅ HF Transformers   |     ✅ HF Transformers   |
     | [Jsonformer](https://github.com/1rgs/jsonformer)                                                    |     ❌ No Enum Support     |        💭 Planning      |         💭 Planning       |
     | [Strictjson](https://github.com/tanchongmin/strictjson)                                             |   ❌ Non-standard schema   |  ❌ Non-standard schema |   ❌ Non-standard schema  |
     | [Guidance](https://github.com/guidance-ai/guidance)                                                 |         💭 Planning        |        💭 Planning      |         💭 Planning       |

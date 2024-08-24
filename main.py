@@ -38,31 +38,40 @@ def run_benchmark(config_path: str = "config.yaml"):
             )
             logger.info(f"Using {type(framework_instance)}")
 
-            for row in tqdm(
-                framework_instance.source_data.itertuples(),
-                desc=f"Running {framework_instance.task}",
-                total=len(framework_instance.source_data),
-            ):
-                if isinstance(row.labels, list):
-                    labels = set(row.labels)
-                else:
-                    labels = row.labels
+            if framework_instance.source_data:
+                for row in tqdm(
+                    framework_instance.source_data.itertuples(),
+                    desc=f"Running {framework_instance.task}",
+                    total=len(framework_instance.source_data),
+                ):
+                    if isinstance(row.labels, list):
+                        labels = set(row.labels)
+                    else:
+                        labels = row.labels
 
-                # logger.info(f"Actual Text: {row.text}")
-                # logger.info(f"Actual Labels: {labels}")
-                predictions, percent_successful, framework_metrics, latencies = (
+                    # logger.info(f"Actual Text: {row.text}")
+                    # logger.info(f"Actual Labels: {labels}")
+                    predictions, percent_successful, framework_metrics, latencies = (
+                        framework_instance.run(
+                            inputs={"text": row.text},
+                            n_runs=n_runs,
+                            expected_response=labels,
+                            task=task,
+                        )
+                    )
+                    
+                    run_results["metrics"].append(framework_metrics)
+            else:
+                predictions, percent_successful, _, latencies = (
                     framework_instance.run(
-                        inputs={"text": row.text},
                         n_runs=n_runs,
-                        expected_response=labels,
                         task=task,
                     )
                 )
-                # logger.info(f"Predicted Labels: {predictions}")
-                run_results["predictions"].append(predictions)
-                run_results["percent_successful"].append(percent_successful)
-                run_results["metrics"].append(framework_metrics)
-                run_results["latencies"].append(latencies)
+            # logger.info(f"Predicted Labels: {predictions}")
+            run_results["predictions"].append(predictions)
+            run_results["percent_successful"].append(percent_successful)
+            run_results["latencies"].append(latencies)
 
             results[config_key][task] = run_results
 
@@ -78,16 +87,20 @@ def run_benchmark(config_path: str = "config.yaml"):
 
 @app.command()
 def generate_results(
-    results_data_path: str = "./results/multilabel_classification",
+    results_data_path: str = "",
     task: str = "multilabel_classification",
 ):
 
-    allowed_tasks = ["multilabel_classification", "ner"]
+    allowed_tasks = ["multilabel_classification", "ner", "synthetic_data_generation"]
     if task not in allowed_tasks:
         raise ValueError(f"{task} is not allowed. Allowed values are {allowed_tasks}")
+    
+    if not results_data_path:
+        results_data_path = f"./results/{task}"
 
     # Combine results from different frameworks
     results = {}
+
     for file_name in os.listdir(results_data_path):
         if file_name.endswith(".pkl"):
             file_path = os.path.join(results_data_path, file_name)
@@ -114,6 +127,13 @@ def generate_results(
         micro_metrics_df = metrics.ner_micro_metrics(results)
         logger.info(f"NER Micro Metrics:\n{micro_metrics_df}")
 
+    # Variety
+    if task == "synthetic_data_generation":
+        predictions = {
+            framework: value[task]["predictions"][0]
+            for framework, value in results.items()
+        }
+        logger.info(f"Variety:\n{metrics.variety_metric(predictions)}")
 
 if __name__ == "__main__":
     app()
