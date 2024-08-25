@@ -13,39 +13,40 @@
 
 Benchmark various LLM Structured Output frameworks: Instructor, Mirascope, Langchain, LlamaIndex, Fructose, Marvin, Outlines, LMFormatEnforcer, etc on tasks like multi-label classification, named entity recognition, synthetic data generation, etc.
 
-## 🏆 Benchmark Results [2024-08-24]
+## 🏆 Benchmark Results [2024-08-25]
 
 1. Multi-label classification
     | Framework                                                                                           |                 Model                | Reliability | Latency p95 (s) |
     |-----------------------------------------------------------------------------------------------------|:------------------------------------:|:-----------:|:---------------:|
-    | [Instructor](https://github.com/jxnl/instructor)                                                    |        gpt-4o-mini-2024-07-18        |    1.000    |       1.096     |
-    | [OpenAI Structured Output](https://github.com/openai/openai-python)                                 |        gpt-4o-mini-2024-07-18        |    1.000    |       1.369     |
-    | [Mirascope](https://github.com/mirascope/mirascope)                                                 |        gpt-4o-mini-2024-07-18        |    1.000    |       1.523     |
-    | [Fructose](https://github.com/bananaml/fructose)                                                    |        gpt-4o-mini-2024-07-18        |    1.000    |       2.256     |
-    | [Outlines](https://github.com/outlines-dev/outlines)                                                | unsloth/llama-3-8b-Instruct-bnb-4bit |    1.000    | 1.891<sup>*</sup> |
-    | [LMFormatEnforcer](https://github.com/noamgat/lm-format-enforcer)                                   | unsloth/llama-3-8b-Instruct-bnb-4bit |    1.000    | 2.994<sup>*</sup> |
-    | [Llamaindex](https://docs.llamaindex.ai/en/stable/examples/output_parsing/openai_pydantic_program/) |        gpt-4o-mini-2024-07-18        |    0.999    |       0.936     |
-    | [Modelsmith](https://github.com/christo-olivier/modelsmith)                                         |        gpt-4o-mini-2024-07-18        |    0.999    |       1.333     |
-    | [Marvin](https://github.com/PrefectHQ/marvin)                                                       |        gpt-4o-mini-2024-07-18        |    0.998    |       1.722     |
+    | [Fructose](https://github.com/bananaml/fructose)                                                    |        gpt-4o-mini-2024-07-18        |    1.000    |       1.138     |
+    | [Modelsmith](https://github.com/christo-olivier/modelsmith)                                         |        gpt-4o-mini-2024-07-18        |    1.000    |       1.184     |
+    | [OpenAI Structured Output](https://github.com/openai/openai-python)                                 |        gpt-4o-mini-2024-07-18        |    1.000    |       1.201     |
+    | [Instructor](https://github.com/jxnl/instructor)                                                    |        gpt-4o-mini-2024-07-18        |    1.000    |       1.206     |
+    | [Outlines](https://github.com/outlines-dev/outlines)                                                | unsloth/llama-3-8b-Instruct-bnb-4bit |    1.000    | 1.804<sup>*</sup> |
+    | [LMFormatEnforcer](https://github.com/noamgat/lm-format-enforcer)                                   | unsloth/llama-3-8b-Instruct-bnb-4bit |    1.000    | 3.649<sup>*</sup> |
+    | [Llamaindex](https://docs.llamaindex.ai/en/stable/examples/output_parsing/openai_pydantic_program/) |        gpt-4o-mini-2024-07-18        |    0.996    |       0.853     |
+    | [Marvin](https://github.com/PrefectHQ/marvin)                                                       |        gpt-4o-mini-2024-07-18        |    0.988    |       1.338     |
+    | [Mirascope](https://github.com/mirascope/mirascope)                                                 |        gpt-4o-mini-2024-07-18        |    0.985    |       1.531     |
 1. Named Entity Recognition
     | Framework                                                                                           |                 Model                | Reliability | Latency p95 (s) |  Precision  |   Recall    |  F1 Score   |
     |-----------------------------------------------------------------------------------------------------|:------------------------------------:|:-----------:|:---------------:|:-----------:|:-----------:|:-----------:|
-    | [Instructor](https://github.com/jxnl/instructor)                                                    |        gpt-4o-mini-2024-07-18        |    1.000    |       3.319     |    0.807    |    0.733    |    0.768    |
-    | [OpenAI Structured Output](https://github.com/openai/openai-python)                                 |        gpt-4o-mini-2024-07-18        |    1.000    |       3.374     |    0.808    |    0.748    |    0.777    |
-    | [LMFormatEnforcer](https://github.com/noamgat/lm-format-enforcer)                                   | unsloth/llama-3-8b-Instruct-bnb-4bit |    1.000    | 9.655<sup>*</sup> |    0.761    |    0.488    |    0.595    |
-    | [Mirascope](https://github.com/mirascope/mirascope)                                                 |        gpt-4o-mini-2024-07-18        |    0.998    |       6.531     |    0.805    |    0.644    |    0.715    |
-    | [Llamaindex](https://docs.llamaindex.ai/en/stable/examples/output_parsing/openai_pydantic_program/) |        gpt-4o-mini-2024-07-18        |    0.997    |       2.212     |    0.770    |    0.106    |    0.186    |
-    | [Marvin](https://github.com/PrefectHQ/marvin)                                                       |        gpt-4o-mini-2024-07-18        |    0.936    |       4.179     |    0.815    |    0.797    |    0.806    |
+    | [OpenAI Structured Output](https://github.com/openai/openai-python)                                 |        gpt-4o-mini-2024-07-18        |    1.000    |       3.459     |    0.834    |    0.748    |    0.789    |
+    | [LMFormatEnforcer](https://github.com/noamgat/lm-format-enforcer)                                   | unsloth/llama-3-8b-Instruct-bnb-4bit |    1.000    | 6.573<sup>*</sup> |    0.701    |    0.262    |    0.382    |
+    | [Instructor](https://github.com/jxnl/instructor)                                                    |        gpt-4o-mini-2024-07-18        |    0.998    |       2.438     |    0.776    |    0.768    |    0.772    |
+    | [Mirascope](https://github.com/mirascope/mirascope)                                                 |        gpt-4o-mini-2024-07-18        |    0.989    |       3.879     |    0.768    |    0.738    |    0.752    |
+    | [Llamaindex](https://docs.llamaindex.ai/en/stable/examples/output_parsing/openai_pydantic_program/) |        gpt-4o-mini-2024-07-18        |    0.979    |       5.771     |    0.792    |    0.310    |    0.446    |
+    | [Marvin](https://github.com/PrefectHQ/marvin)                                                       |        gpt-4o-mini-2024-07-18        |    0.979    |       3.270     |    0.822    |    0.776    |    0.798    |
 1. Synthetic Data Generation
     | Framework                                                                                           |                 Model                | Reliability | Latency p95 (s) | Variety |
     |-----------------------------------------------------------------------------------------------------|:------------------------------------:|:-----------:|:---------------:|:-------:|
-    | [Marvin](https://github.com/PrefectHQ/marvin)                                                       |        gpt-4o-mini-2024-07-18        |    1.000    |       1.618     |  0.010  |
-    | [Modelsmith](https://github.com/christo-olivier/modelsmith)                                         |        gpt-4o-mini-2024-07-18        |    0.990    |       2.620     |  0.808  |
-    | [Instructor](https://github.com/jxnl/instructor)                                                    |        gpt-4o-mini-2024-07-18        |    0.980    |       1.964     |  0.786  |
-    | [Llamaindex](https://docs.llamaindex.ai/en/stable/examples/output_parsing/openai_pydantic_program/) |        gpt-4o-mini-2024-07-18        |    0.980    |       1.123     |  0.020  |
-    | [OpenAI Structured Output](https://github.com/openai/openai-python)                                 |        gpt-4o-mini-2024-07-18        |    0.690    |       7.907     |  0.913  |
-    | [Outlines](https://github.com/outlines-dev/outlines)                                                | unsloth/llama-3-8b-Instruct-bnb-4bit |    0.620    | 2.559<sup>*</sup> |  0.952  |
-    | [LMFormatEnforcer](https://github.com/noamgat/lm-format-enforcer)                                   | unsloth/llama-3-8b-Instruct-bnb-4bit |    0.550    | 2.654<sup>*</sup> |  0.618  |
+    | [Instructor](https://github.com/jxnl/instructor)                                                    |        gpt-4o-mini-2024-07-18        |    1.000    |       1.923     |  0.750  |
+    | [Marvin](https://github.com/PrefectHQ/marvin)                                                       |        gpt-4o-mini-2024-07-18        |    1.000    |       1.496     |  0.010  |
+    | [Llamaindex](https://docs.llamaindex.ai/en/stable/examples/output_parsing/openai_pydantic_program/) |        gpt-4o-mini-2024-07-18        |    1.000    |       1.003     |  0.020  |
+    | [Modelsmith](https://github.com/christo-olivier/modelsmith)                                         |        gpt-4o-mini-2024-07-18        |    0.970    |       2.324     |  0.835  |
+    | [Mirascope](https://github.com/mirascope/mirascope)                                                 |        gpt-4o-mini-2024-07-18        |    0.790    |       3.383     |  0.886  |
+    | [Outlines](https://github.com/outlines-dev/outlines)                                                | unsloth/llama-3-8b-Instruct-bnb-4bit |    0.690    | 2.354<sup>*</sup> |  0.942  |
+    | [OpenAI Structured Output](https://github.com/openai/openai-python)                                 |        gpt-4o-mini-2024-07-18        |    0.650    |       1.431     |  0.877  |
+    | [LMFormatEnforcer](https://github.com/noamgat/lm-format-enforcer)                                   | unsloth/llama-3-8b-Instruct-bnb-4bit |    0.650    | 2.561<sup>*</sup> |  0.662  |
 
 <sup>*</sup> NVIDIA GeForce RTX 4080 Super GPU
 
