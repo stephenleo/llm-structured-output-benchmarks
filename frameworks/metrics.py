@@ -45,7 +45,7 @@ def ner_micro_metrics(results: dict[str, list[float]]):
     
     for framework, values in results.items():
         tp_total, fp_total, fn_total = 0, 0, 0
-        runs = values["ner"]["metrics"]
+        runs = values["metrics"]
 
         for run in runs:
             for metric in run:

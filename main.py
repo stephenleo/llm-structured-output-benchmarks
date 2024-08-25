@@ -21,8 +21,8 @@ def run_benchmark(config_path: str = "config.yaml"):
     with open(config_path, "r") as file:
         configs = yaml.safe_load(file)
 
-    results = {}
     for config_key, config_values in configs.items():
+        results = {}
         for config in config_values:
             results[config_key] = {}
             task = config["task"]
@@ -60,8 +60,11 @@ def run_benchmark(config_path: str = "config.yaml"):
                             task=task,
                         )
                     )
-                    
+                    # logger.info(f"Predicted Labels: {predictions}")
                     run_results["metrics"].append(framework_metrics)
+                    run_results["predictions"].append(predictions)
+                    run_results["percent_successful"].append(percent_successful)
+                    run_results["latencies"].append(latencies)
             else:
                 predictions, percent_successful, _, latencies = (
                     framework_instance.run(
@@ -69,12 +72,12 @@ def run_benchmark(config_path: str = "config.yaml"):
                         task=task,
                     )
                 )
-            # logger.info(f"Predicted Labels: {predictions}")
-            run_results["predictions"].append(predictions)
-            run_results["percent_successful"].append(percent_successful)
-            run_results["latencies"].append(latencies)
+                # logger.info(f"Predicted Labels: {predictions}")
+                run_results["predictions"].append(predictions)
+                run_results["percent_successful"].append(percent_successful)
+                run_results["latencies"].append(latencies)
 
-            results[config_key][task] = run_results
+            results[config_key] = run_results
 
             # logger.info(f"Results:\n{results}")
 
@@ -111,14 +114,14 @@ def generate_results(
 
     # Reliability
     percent_successful = {
-        framework: value[task]["percent_successful"]
+        framework: value["percent_successful"]
         for framework, value in results.items()
     }
     logger.info(f"Reliability:\n{metrics.reliability_metric(percent_successful)}")
 
     # Latency
     latencies = {
-        framework: value[task]["latencies"]
+        framework: value["latencies"]
         for framework, value in results.items()
     }
     logger.info(f"Latencies:\n{metrics.latency_metric(latencies, 95)}")
@@ -131,7 +134,7 @@ def generate_results(
     # Variety
     if task == "synthetic_data_generation":
         predictions = {
-            framework: value[task]["predictions"][0]
+            framework: value["predictions"][0]
             for framework, value in results.items()
         }
         logger.info(f"Variety:\n{metrics.variety_metric(predictions)}")

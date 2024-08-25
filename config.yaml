@@ -68,6 +68,13 @@ MirascopeFramework:
       retries: 2
       source_data_pickle_path: "data/ner.pkl"
       # sample_rows: 2
+  - task: "synthetic_data_generation"
+    n_runs: 100
+    init_kwargs:
+      prompt: "Generate a random person's information. The name must be chosen at random. Make it something you wouldn't normally choose."
+      llm_model: "gpt-4o-mini-2024-07-18"
+      llm_model_family: "openai"
+      retries: 2
 
 FructoseFramework:
   - task: "multilabel_classification"
@@ -205,7 +212,7 @@ ModelsmithFramework:
 #       llm_model_family: "openai"
 #       retries: 2
 #       source_data_pickle_path: "data/ner.pkl"
-      # sample_rows: 2
+#       sample_rows: 2
 
 # FructoseFramework:
 #   - task: "ner"
