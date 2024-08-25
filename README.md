@@ -144,8 +144,9 @@ The easiest way to create a new framework is to reference the `./frameworks/inst
 1. Framework related tasks:
     | Framework                                                                                           | Multi-label classification | Named Entity Recognition | Synthetic Data Generation |
     |-----------------------------------------------------------------------------------------------------|:--------------------------:|:------------------------:|:-------------------------:|
+    | [OpenAI Structured Output](https://github.com/openai/openai-python)                                 |          ✅ OpenAI         |         ✅ OpenAI       |          ✅ OpenAI       |
     | [Instructor](https://github.com/jxnl/instructor)                                                    |          ✅ OpenAI         |         ✅ OpenAI       |          ✅ OpenAI       |
-    | [Mirascope](https://github.com/mirascope/mirascope)                                                 |          ✅ OpenAI         |         ✅ OpenAI       |       🚧 In Progress     |
+    | [Mirascope](https://github.com/mirascope/mirascope)                                                 |          ✅ OpenAI         |         ✅ OpenAI       |          ✅ OpenAI       |
     | [Fructose](https://github.com/bananaml/fructose)                                                    |          ✅ OpenAI         |      🚧 In Progress     |       🚧 In Progress     |
     | [Marvin](https://github.com/PrefectHQ/marvin)                                                       |          ✅ OpenAI         |         ✅ OpenAI       |          ✅ OpenAI       |
     | [Llamaindex](https://docs.llamaindex.ai/en/stable/examples/output_parsing/openai_pydantic_program/) |          ✅ OpenAI         |         ✅ OpenAI       |          ✅ OpenAI       |
