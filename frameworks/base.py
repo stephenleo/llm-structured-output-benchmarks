@@ -12,6 +12,7 @@ from tqdm import tqdm
 from data_sources.data_models import (
     multilabel_classification_model,
     ner_model,
+    ner_required_fields_model,
     synthetic_data_generation_model,
 )
 
@@ -82,7 +83,7 @@ def experiment(
 
     def experiment_decorator(func):
         def wrapper(*args, **kwargs):
-            allowed_tasks = ["multilabel_classification", "ner", "synthetic_data_generation"]
+            allowed_tasks = ["multilabel_classification", "ner", "ner_required_fields", "synthetic_data_generation"]
             if task not in allowed_tasks:
                 raise ValueError(
                     f"{task} is not allowed. Allowed values are {allowed_tasks}"
@@ -119,7 +120,7 @@ def experiment(
                 framework_metrics = {
                     "accuracy": accurate / num_successful if num_successful else 0
                 }
-            elif task == "ner":
+            elif task in ("ner", "ner_required_fields"):
                 framework_metrics = []
                 for response in responses:
                     framework_metrics.append(calculate_metrics(expected_response, response))
@@ -190,6 +191,14 @@ class BaseFramework(ABC):
             )
 
             self.response_model = ner_model(self.entities)
+
+        elif self.task == "ner_required_fields":
+            # Identify the entities
+            self.entities = list(
+                {key for d in self.source_data["labels"] for key in d.keys()}
+            )
+
+            self.response_model = ner_required_fields_model(self.entities)
 
         elif self.task == "synthetic_data_generation":
             self.response_model = synthetic_data_generation_model()

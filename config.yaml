@@ -149,6 +149,18 @@ OutlinesFramework:
       retries: 0 # Oulines transformers has no retry parameter
       source_data_pickle_path: "data/multilabel_classification.pkl"
       # sample_rows: 2
+  - task: "ner_required_fields"
+    n_runs: 10
+    init_kwargs:
+      prompt: "Extract and resolve a list of entities from the following text: {text}"
+      # switch to prompt with JSON schema when supported:
+      #prompt: "Extract and resolve a list of entities from the following text: {text}.\nRespond in the following json schema: {json_schema}:\n"
+      llm_model: "unsloth/llama-3-8b-Instruct-bnb-4bit"
+      llm_model_family: "transformers"
+      retries: 0
+      source_data_pickle_path: "data/ner.pkl"
+      max_length: 4096
+      #sample_rows: 2
   - task: "synthetic_data_generation"
     n_runs: 100
     init_kwargs:
@@ -174,6 +186,16 @@ LMFormatEnforcerFramework:
       llm_model: "unsloth/llama-3-8b-Instruct-bnb-4bit"
       llm_model_family: "transformers"
       retries: 0 
+      source_data_pickle_path: "data/ner.pkl"
+      max_length: 4096
+      # sample_rows: 2
+  - task: "ner_required_fields"
+    n_runs: 10
+    init_kwargs:
+      prompt: "Extract and resolve a list of entities from the following text: {text}.\nRespond in the following json schema: {json_schema}:\n"
+      llm_model: "unsloth/llama-3-8b-Instruct-bnb-4bit"
+      llm_model_family: "transformers"
+      retries: 0
       source_data_pickle_path: "data/ner.pkl"
       max_length: 4096
       # sample_rows: 2
