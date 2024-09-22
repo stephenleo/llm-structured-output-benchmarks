@@ -12,17 +12,19 @@ class PolyfactoryFramework(BaseFramework):
         class ResponseFactory(ModelFactory):
             __model__ = self.response_model
             __randomize_collection_length__ = True
+
+        if self.task == "multilabel_classification":
             # as a note, the response model allows repeated classes so this max
             # length is not quite correct, however it's better than the default
             # of 5
-            __max_collection_length__ = len(self.classes)
+            ResponseFactory.__max_collection_length__ = len(self.classes)
 
         self.response_factory = ResponseFactory
 
     def run(
-        self, n_runs: int, expected_response: Any, inputs: dict
-    ) -> tuple[list[Any], float, float]:
-        @experiment(n_runs=n_runs, expected_response=expected_response)
+        self, task: str, n_runs: int, expected_response: Any = None, inputs: dict = {}
+    ) -> tuple[list[Any], float, dict, list[list[float]]]:
+        @experiment(n_runs=n_runs, expected_response=expected_response, task=task)
         def run_experiment(inputs):
             return self.response_factory.build()
 
