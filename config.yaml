@@ -250,4 +250,5 @@ PolyfactoryFramework:
   - task: "synthetic_data_generation"
     n_runs: 100
     init_kwargs:
+      dummy_placeholder: true
       # sample_rows: 2
