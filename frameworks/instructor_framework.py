@@ -12,9 +12,9 @@ class InstructorFramework(BaseFramework):
         self.instructor_client = instructor.patch(OpenAI())
 
     def run(
-        self, n_runs: int, expected_response: Any, inputs: dict
-    ) -> tuple[list[Any], float, float]:
-        @experiment(n_runs=n_runs, expected_response=expected_response)
+        self, task: str, n_runs: int, expected_response: Any = None, inputs: dict = {}
+    ) -> tuple[list[Any], float, dict, list[list[float]]]:
+        @experiment(n_runs=n_runs, expected_response=expected_response, task=task)
         def run_experiment(inputs):
             response = self.instructor_client.chat.completions.create(
                 model=self.llm_model,
@@ -24,5 +24,5 @@ class InstructorFramework(BaseFramework):
             )
             return response
 
-        predictions, percent_successful, accuracy, latencies = run_experiment(inputs)
-        return predictions, percent_successful, accuracy, latencies
+        predictions, percent_successful, metrics, latencies = run_experiment(inputs)
+        return predictions, percent_successful, metrics, latencies

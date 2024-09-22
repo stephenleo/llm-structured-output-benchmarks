@@ -18,8 +18,9 @@ class FructoseFramework(BaseFramework):
         self.response_model = pydantic_to_dataclass(self.response_model)
 
     def run(
-        self, n_runs: int, expected_response: Any, inputs: dict
-    ) -> tuple[list[Any], float, float]:
+        self, task: str, n_runs: int, expected_response: Any = None, inputs: dict = {}
+    ) -> tuple[list[Any], float, dict, list[list[float]]]:
+        
         prompt_fields = re.findall(r"\{(.*?)\}", self.prompt)
 
         if len(prompt_fields) > 1:
@@ -27,7 +28,7 @@ class FructoseFramework(BaseFramework):
                 "Fructose only supports a single input field in the prompt. Please update the prompt to have only one field within curly brackets: { }"
             )
 
-        @experiment(n_runs=n_runs, expected_response=expected_response)
+        @experiment(n_runs=n_runs, expected_response=expected_response, task=task)
         @self.fructose_client
         def run_experiment(text: str) -> self.response_model: ...
 
@@ -35,8 +36,8 @@ class FructoseFramework(BaseFramework):
         docstring_args = f"""\n\nArgs:\n    text (str): The text to analyze\n\nReturns:\n    {self.response_model.__qualname__}: The items present in the text"""
         run_experiment.__doc__ = self.prompt + docstring_args
 
-        predictions, percent_successful, accuracy, latencies = run_experiment(
+        predictions, percent_successful, metrics, latencies = run_experiment(
             text=inputs[prompt_fields[0]]
         )
 
-        return predictions, percent_successful, accuracy, latencies
+        return predictions, percent_successful, metrics, latencies
