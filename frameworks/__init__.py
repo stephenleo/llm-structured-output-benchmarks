@@ -1,6 +1,7 @@
 from typing import Any
 
 from frameworks.base import experiment
+from frameworks.formatron_framework import FormatronFramework
 from frameworks.fructose_framework import FructoseFramework
 from frameworks.instructor_framework import InstructorFramework
 from frameworks.llamaindex_framework import LlamaIndexFramework

@@ -1,6 +1,7 @@
 accelerate==0.31.0
 bitsandbytes==0.43.1
 datasets==3.0.0
+formatron==0.4.2
 fructose==0.0.13
 fsspec==2024.6.1
 instructor==1.4.3
