@@ -8,6 +8,7 @@ from frameworks.base import BaseFramework, experiment
 class OutlinesFramework(BaseFramework):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
+        self.max_length = kwargs.get("max_length", 4096)
 
         # TODO: Handle openai model
         if self.llm_model_family == "transformers":
@@ -26,7 +27,13 @@ class OutlinesFramework(BaseFramework):
     ) -> tuple[list[Any], float, dict, list[list[float]]]:
         @experiment(n_runs=n_runs, expected_response=expected_response, task=task)
         def run_experiment(inputs):
-            response = self.outline_generator(self.prompt.format(**inputs))
+            response = self.outline_generator(
+                self.prompt.format(
+                    json_schema=self.response_model.model_json_schema(),
+                    **inputs,
+                ),
+                max_tokens=self.max_length,
+            )
             return response
 
         predictions, percent_successful, metrics, latencies = run_experiment(inputs)
