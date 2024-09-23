@@ -22,7 +22,7 @@ Benchmark various LLM Structured Output frameworks: Instructor, Mirascope, Langc
     | [Modelsmith](https://github.com/christo-olivier/modelsmith)                                         |        gpt-4o-mini-2024-07-18        |    1.000    |       1.184     |
     | [OpenAI Structured Output](https://github.com/openai/openai-python)                                 |        gpt-4o-mini-2024-07-18        |    1.000    |       1.201     |
     | [Instructor](https://github.com/jxnl/instructor)                                                    |        gpt-4o-mini-2024-07-18        |    1.000    |       1.206     |
-    | [Outlines](https://github.com/outlines-dev/outlines)                                                | unsloth/llama-3-8b-Instruct-bnb-4bit |    1.000    | 1.804<sup>*</sup> |
+    | [Outlines](https://github.com/outlines-dev/outlines)                                                | unsloth/llama-3-8b-Instruct-bnb-4bit |    1.000    | 7.606<sup>*</sup> |
     | [LMFormatEnforcer](https://github.com/noamgat/lm-format-enforcer)                                   | unsloth/llama-3-8b-Instruct-bnb-4bit |    1.000    | 3.649<sup>*</sup> |
     | [Llamaindex](https://docs.llamaindex.ai/en/stable/examples/output_parsing/openai_pydantic_program/) |        gpt-4o-mini-2024-07-18        |    0.996    |       0.853     |
     | [Marvin](https://github.com/PrefectHQ/marvin)                                                       |        gpt-4o-mini-2024-07-18        |    0.988    |       1.338     |
@@ -44,7 +44,7 @@ Benchmark various LLM Structured Output frameworks: Instructor, Mirascope, Langc
     | [Llamaindex](https://docs.llamaindex.ai/en/stable/examples/output_parsing/openai_pydantic_program/) |        gpt-4o-mini-2024-07-18        |    1.000    |       1.003     |  0.020  |
     | [Modelsmith](https://github.com/christo-olivier/modelsmith)                                         |        gpt-4o-mini-2024-07-18        |    0.970    |       2.324     |  0.835  |
     | [Mirascope](https://github.com/mirascope/mirascope)                                                 |        gpt-4o-mini-2024-07-18        |    0.790    |       3.383     |  0.886  |
-    | [Outlines](https://github.com/outlines-dev/outlines)                                                | unsloth/llama-3-8b-Instruct-bnb-4bit |    0.690    | 2.354<sup>*</sup> |  0.942  |
+    | [Outlines](https://github.com/outlines-dev/outlines)                                                | unsloth/llama-3-8b-Instruct-bnb-4bit |    0.350    | 3.577<sup>*</sup> |  1.000  |
     | [OpenAI Structured Output](https://github.com/openai/openai-python)                                 |        gpt-4o-mini-2024-07-18        |    0.650    |       1.431     |  0.877  |
     | [LMFormatEnforcer](https://github.com/noamgat/lm-format-enforcer)                                   | unsloth/llama-3-8b-Instruct-bnb-4bit |    0.650    | 2.561<sup>*</sup> |  0.662  |
 
