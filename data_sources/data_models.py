@@ -2,7 +2,7 @@ import dataclasses
 from enum import Enum
 from typing import Any, Optional, Type
 
-from pydantic import BaseModel, create_model, field_validator
+from pydantic import BaseModel, Field, create_model, field_validator
 from pydantic_core import PydanticUndefined
 
 
@@ -22,6 +22,14 @@ def ner_model(ner_entities):
     NER = create_model("NER", **fields)
 
     return NER
+
+
+def ner_required_fields_model(ner_entities):
+    fields = {name: (list[str], Field(description="")) for name in ner_entities}
+
+    NERRequiredFields = create_model("NERRequiredFields", **fields)
+
+    return NERRequiredFields
 
 
 def synthetic_data_generation_model():

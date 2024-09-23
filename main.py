@@ -95,7 +95,7 @@ def generate_results(
     task: str = "multilabel_classification",
 ):
 
-    allowed_tasks = ["multilabel_classification", "ner", "synthetic_data_generation"]
+    allowed_tasks = ["multilabel_classification", "ner", "ner_required_fields", "synthetic_data_generation"]
     if task not in allowed_tasks:
         raise ValueError(f"{task} is not allowed. Allowed values are {allowed_tasks}")
     
@@ -127,7 +127,7 @@ def generate_results(
     logger.info(f"Latencies:\n{metrics.latency_metric(latencies, 95)}")
 
     # NER Micro Metrics
-    if task == "ner":
+    if task in ("ner", "ner_required_fields"):
         micro_metrics_df = metrics.ner_micro_metrics(results)
         logger.info(f"NER Micro Metrics:\n{micro_metrics_df}")
 
