@@ -9,6 +9,7 @@ from frameworks.marvin_framework import MarvinFramework
 from frameworks.mirascope_framework import MirascopeFramework
 from frameworks.modelsmith_framework import ModelsmithFramework
 from frameworks.outlines_framework import OutlinesFramework
+from frameworks.polyfactory_framework import PolyfactoryFramework
 from frameworks.vanilla_openai_framework import VanillaOpenAIFramework
 
 
